@@ -49,22 +49,37 @@ export function ArticleReader({
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
         
-        {/* Breadcrumb de Navegação */}
-        <nav className="flex items-center gap-2 text-xs font-semibold text-slate-500">
-          <button onClick={onGoToLanding} className="hover:text-brand-primary transition-colors">
-            Home
+        {/* Barra de Retorno e Breadcrumbs */}
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-200">
+          <nav className="flex items-center gap-2 text-xs font-semibold text-slate-500">
+            <button
+              onClick={onGoToLanding}
+              className="hover:text-brand-primary transition-colors flex items-center gap-1"
+            >
+              <span>Início</span>
+            </button>
+            <ChevronRight className="w-3.5 h-3.5" />
+            <button
+              onClick={onBackToBlog}
+              className="hover:text-brand-primary transition-colors font-bold"
+            >
+              Blog
+            </button>
+            <ChevronRight className="w-3.5 h-3.5" />
+            <span className="text-brand-primary font-bold">{article.categoryLabel}</span>
+            <ChevronRight className="w-3.5 h-3.5 hidden md:inline" />
+            <span className="text-slate-700 font-medium truncate max-w-xs hidden md:inline">
+              {article.title}
+            </span>
+          </nav>
+
+          <button
+            onClick={onBackToBlog}
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-white border border-slate-200 text-xs font-bold text-slate-700 hover:bg-slate-50 hover:border-brand-primary hover:text-brand-primary transition-all shadow-sm self-start sm:self-auto"
+          >
+            <span>← Voltar para Todos os Artigos</span>
           </button>
-          <ChevronRight className="w-3.5 h-3.5" />
-          <button onClick={onBackToBlog} className="hover:text-brand-primary transition-colors">
-            Blog
-          </button>
-          <ChevronRight className="w-3.5 h-3.5" />
-          <span className="text-brand-primary">{article.categoryLabel}</span>
-          <ChevronRight className="w-3.5 h-3.5 hidden sm:inline" />
-          <span className="text-slate-800 font-bold truncate max-w-xs hidden sm:inline">
-            {article.title}
-          </span>
-        </nav>
+        </div>
 
         {/* HEADER DO ARTIGO */}
         <header className="space-y-6 max-w-4xl">
