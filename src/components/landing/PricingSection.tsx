@@ -1,17 +1,38 @@
 import { useState } from 'react';
 import { Check, Sparkles, ArrowRight, Shield } from 'lucide-react';
 import { FlameSvg } from '../icons/DmsLogos.js';
+import { SelectedPlan, BillingInterval, PlanKey } from '../../types/checkout.js';
 
-export function PricingSection() {
+interface PricingSectionProps {
+  onSelectPlan?: (plan: SelectedPlan, interval: BillingInterval) => void;
+}
+
+export function PricingSection({ onSelectPlan }: PricingSectionProps) {
   const [isAnnual, setIsAnnual] = useState(false);
 
-  const plans = [
+  const plans: Array<{
+    key: PlanKey;
+    name: string;
+    isPopular: boolean;
+    badge: string | null;
+    monthlyPrice: number;
+    yearlyPrice: number;
+    carsLimit: string;
+    annualBilled: string;
+    description: string;
+    features: string[];
+    ctaText: string;
+    ctaHighlight: boolean;
+  }> = [
     {
+      key: 'STARTER',
       name: 'Starter Catalog',
       isPopular: false,
       badge: null,
-      price: isAnnual ? 408 : 490,
-      annualBilled: isAnnual ? 'R$ 4.900 cobrados anualmente' : 'Cobrança mensal sem fidelidade',
+      monthlyPrice: 490,
+      yearlyPrice: 4900,
+      carsLimit: 'Até 50 veículos',
+      annualBilled: 'R$ 4.900 cobrados anualmente',
       description: 'Ideal para lojas boutique e revendas com estoque compacto de até 50 veículos.',
       features: [
         'Até 50 veículos ativos no catálogo',
@@ -24,11 +45,14 @@ export function PricingSection() {
       ctaHighlight: false,
     },
     {
+      key: 'PRO',
       name: 'Pro Automotive',
       isPopular: true,
       badge: 'Mais Escolhido pelas Revendas',
-      price: isAnnual ? 741 : 890,
-      annualBilled: isAnnual ? 'R$ 8.900 cobrados anualmente' : 'Cobrança mensal sem fidelidade',
+      monthlyPrice: 890,
+      yearlyPrice: 8900,
+      carsLimit: 'Até 200 veículos',
+      annualBilled: 'R$ 8.900 cobrados anualmente',
       description: 'O plano perfeito para concessionárias que buscam alta performance de vendas e escala no Meta Ads.',
       features: [
         'Até 200 veículos ativos no catálogo',
@@ -42,11 +66,14 @@ export function PricingSection() {
       ctaHighlight: true,
     },
     {
+      key: 'ENTERPRISE',
       name: 'Enterprise DAA',
       isPopular: false,
       badge: 'Para Grupos e Multi-Lojas',
-      price: isAnnual ? 1241 : 1490,
-      annualBilled: isAnnual ? 'R$ 14.900 cobrados anualmente' : 'Cobrança mensal sem fidelidade',
+      monthlyPrice: 1490,
+      yearlyPrice: 14900,
+      carsLimit: 'Veículos Ilimitados',
+      annualBilled: 'R$ 14.900 cobrados anualmente',
       description: 'Para grandes redes de concessionárias, grupos automotivos e agências de performance.',
       features: [
         'Veículos e catálogos ilimitados',
@@ -56,10 +83,25 @@ export function PricingSection() {
         'SLA garantido de 99.9% de uptime',
         'API de Webhooks e relatórios executivos',
       ],
-      ctaText: 'Falar com Consultor Enterprise',
+      ctaText: 'Assinar Plano Enterprise',
       ctaHighlight: false,
     },
   ];
+
+  const handlePlanClick = (p: typeof plans[0]) => {
+    if (onSelectPlan) {
+      onSelectPlan(
+        {
+          key: p.key,
+          name: p.name,
+          monthlyPrice: p.monthlyPrice,
+          yearlyPrice: p.yearlyPrice,
+          carsLimit: p.carsLimit,
+        },
+        isAnnual ? 'YEARLY' : 'MONTHLY'
+      );
+    }
+  };
 
   return (
     <section id="planos" className="py-20 bg-white border-t border-surface-border">
@@ -107,82 +149,86 @@ export function PricingSection() {
 
         {/* Grid de 3 Cards de Planos */}
         <div className="mt-16 grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch">
-          {plans.map((p, idx) => (
-            <div
-              key={idx}
-              className={`relative rounded-3xl p-8 flex flex-col justify-between transition-all duration-300 ${
-                p.ctaHighlight
-                  ? 'bg-gradient-to-b from-blue-950 via-slate-900 to-slate-950 text-white shadow-2xl ring-2 ring-brand-primary scale-105 z-10'
-                  : 'bg-surface-canvas border border-surface-border text-typography-body shadow-sm hover:shadow-lg'
-              }`}
-            >
-              {/* Badge do Plano em SVG */}
-              {p.badge && (
-                <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-brand-primary text-white text-xs font-extrabold px-4 py-1.5 rounded-full shadow-lg whitespace-nowrap flex items-center gap-1.5">
-                  {p.isPopular ? (
-                    <FlameSvg className="w-3.5 h-3.5 fill-current text-red-400" />
-                  ) : (
-                    <Sparkles className="w-3.5 h-3.5 text-blue-300" />
-                  )}
-                  <span>{p.badge}</span>
-                </div>
-              )}
+          {plans.map((p, idx) => {
+            const displayPrice = isAnnual ? Math.round(p.yearlyPrice / 12) : p.monthlyPrice;
 
-              <div className="space-y-6">
-                <div>
-                  <h3 className={`text-xl font-extrabold ${p.ctaHighlight ? 'text-white' : 'text-typography-heading'}`}>
-                    {p.name}
-                  </h3>
-                  <p className={`text-xs mt-1 leading-relaxed ${p.ctaHighlight ? 'text-slate-300' : 'text-typography-muted'}`}>
-                    {p.description}
-                  </p>
-                </div>
-
-                {/* Preço */}
-                <div className="space-y-1">
-                  <div className="flex items-baseline gap-1">
-                    <span className="text-sm font-bold text-typography-muted">R$</span>
-                    <span className={`text-4xl font-extrabold font-mono tracking-tight ${p.ctaHighlight ? 'text-white' : 'text-brand-price'}`}>
-                      {p.price.toLocaleString('pt-BR')}
-                    </span>
-                    <span className={`text-xs font-bold ${p.ctaHighlight ? 'text-slate-400' : 'text-typography-muted'}`}>
-                      /mês
-                    </span>
+            return (
+              <div
+                key={idx}
+                className={`relative rounded-3xl p-8 flex flex-col justify-between transition-all duration-300 ${
+                  p.ctaHighlight
+                    ? 'bg-gradient-to-b from-blue-950 via-slate-900 to-slate-950 text-white shadow-2xl ring-2 ring-brand-primary scale-105 z-10'
+                    : 'bg-surface-canvas border border-surface-border text-typography-body shadow-sm hover:shadow-lg'
+                }`}
+              >
+                {/* Badge do Plano em SVG */}
+                {p.badge && (
+                  <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-brand-primary text-white text-xs font-extrabold px-4 py-1.5 rounded-full shadow-lg whitespace-nowrap flex items-center gap-1.5">
+                    {p.isPopular ? (
+                      <FlameSvg className="w-3.5 h-3.5 fill-current text-red-400" />
+                    ) : (
+                      <Sparkles className="w-3.5 h-3.5 text-blue-300" />
+                    )}
+                    <span>{p.badge}</span>
                   </div>
-                  <p className={`text-[11px] ${p.ctaHighlight ? 'text-slate-400' : 'text-typography-muted'}`}>
-                    {p.annualBilled}
-                  </p>
+                )}
+
+                <div className="space-y-6">
+                  <div>
+                    <h3 className={`text-xl font-extrabold ${p.ctaHighlight ? 'text-white' : 'text-typography-heading'}`}>
+                      {p.name}
+                    </h3>
+                    <p className={`text-xs mt-1 leading-relaxed ${p.ctaHighlight ? 'text-slate-300' : 'text-typography-muted'}`}>
+                      {p.description}
+                    </p>
+                  </div>
+
+                  {/* Preço */}
+                  <div className="space-y-1">
+                    <div className="flex items-baseline gap-1">
+                      <span className="text-sm font-bold text-typography-muted">R$</span>
+                      <span className={`text-4xl font-extrabold font-mono tracking-tight ${p.ctaHighlight ? 'text-white' : 'text-brand-price'}`}>
+                        {displayPrice.toLocaleString('pt-BR')}
+                      </span>
+                      <span className={`text-xs font-bold ${p.ctaHighlight ? 'text-slate-400' : 'text-typography-muted'}`}>
+                        /mês
+                      </span>
+                    </div>
+                    <p className={`text-[11px] ${p.ctaHighlight ? 'text-slate-400' : 'text-typography-muted'}`}>
+                      {isAnnual ? p.annualBilled : 'Cobrança mensal sem fidelidade'}
+                    </p>
+                  </div>
+
+                  {/* Lista de Features */}
+                  <ul className="space-y-3 pt-4 border-t border-surface-border/50 text-xs">
+                    {p.features.map((feat, fIdx) => (
+                      <li key={fIdx} className="flex items-start gap-2.5">
+                        <Check className={`w-4 h-4 shrink-0 mt-0.5 ${p.ctaHighlight ? 'text-green-400' : 'text-green-600'}`} />
+                        <span className={p.ctaHighlight ? 'text-slate-200' : 'text-typography-body font-medium'}>
+                          {feat}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
 
-                {/* Lista de Features */}
-                <ul className="space-y-3 pt-4 border-t border-surface-border/50 text-xs">
-                  {p.features.map((feat, fIdx) => (
-                    <li key={fIdx} className="flex items-start gap-2.5">
-                      <Check className={`w-4 h-4 shrink-0 mt-0.5 ${p.ctaHighlight ? 'text-green-400' : 'text-green-600'}`} />
-                      <span className={p.ctaHighlight ? 'text-slate-200' : 'text-typography-body font-medium'}>
-                        {feat}
-                      </span>
-                    </li>
-                  ))}
-                </ul>
+                {/* Botão de Ação */}
+                <div className="pt-8 mt-6">
+                  <button
+                    onClick={() => handlePlanClick(p)}
+                    className={`w-full py-3.5 px-4 rounded-xl font-extrabold text-sm flex items-center justify-center gap-2 transition-all shadow-md ${
+                      p.ctaHighlight
+                        ? 'bg-brand-price hover:bg-red-700 text-white shadow-red-500/25 hover:shadow-red-500/35 hover:scale-[1.02]'
+                        : 'bg-white hover:bg-slate-100 text-typography-heading border border-slate-200'
+                    }`}
+                  >
+                    <span>{p.ctaText}</span>
+                    <ArrowRight className="w-4 h-4" />
+                  </button>
+                </div>
               </div>
-
-              {/* Botão de Ação */}
-              <div className="pt-8 mt-6">
-                <a
-                  href="http://127.0.0.1:5173"
-                  className={`w-full py-3.5 px-4 rounded-xl font-extrabold text-sm flex items-center justify-center gap-2 transition-all shadow-md ${
-                    p.ctaHighlight
-                      ? 'bg-brand-price hover:bg-red-700 text-white shadow-red-500/25 hover:shadow-red-500/35 hover:scale-[1.02]'
-                      : 'bg-white hover:bg-slate-100 text-typography-heading border border-slate-200'
-                  }`}
-                >
-                  <span>{p.ctaText}</span>
-                  <ArrowRight className="w-4 h-4" />
-                </a>
-              </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
 
         {/* Garantia de Satisfação */}
