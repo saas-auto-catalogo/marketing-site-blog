@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Check, Sparkles, ArrowRight, Shield } from 'lucide-react';
+import { FlameSvg } from '../icons/DmsLogos.js';
 
 export function PricingSection() {
   const [isAnnual, setIsAnnual] = useState(false);
@@ -7,6 +8,7 @@ export function PricingSection() {
   const plans = [
     {
       name: 'Starter Catalog',
+      isPopular: false,
       badge: null,
       price: isAnnual ? 408 : 490,
       annualBilled: isAnnual ? 'R$ 4.900 cobrados anualmente' : 'Cobrança mensal sem fidelidade',
@@ -23,7 +25,8 @@ export function PricingSection() {
     },
     {
       name: 'Pro Automotive',
-      badge: '🔥 Mais Escolhido pelas Revendas',
+      isPopular: true,
+      badge: 'Mais Escolhido pelas Revendas',
       price: isAnnual ? 741 : 890,
       annualBilled: isAnnual ? 'R$ 8.900 cobrados anualmente' : 'Cobrança mensal sem fidelidade',
       description: 'O plano perfeito para concessionárias que buscam alta performance de vendas e escala no Meta Ads.',
@@ -40,6 +43,7 @@ export function PricingSection() {
     },
     {
       name: 'Enterprise DAA',
+      isPopular: false,
       badge: 'Para Grupos e Multi-Lojas',
       price: isAnnual ? 1241 : 1490,
       annualBilled: isAnnual ? 'R$ 14.900 cobrados anualmente' : 'Cobrança mensal sem fidelidade',
@@ -112,10 +116,15 @@ export function PricingSection() {
                   : 'bg-surface-canvas border border-surface-border text-typography-body shadow-sm hover:shadow-lg'
               }`}
             >
-              {/* Badge do Plano */}
+              {/* Badge do Plano em SVG */}
               {p.badge && (
-                <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-brand-primary text-white text-xs font-extrabold px-4 py-1.5 rounded-full shadow-lg whitespace-nowrap">
-                  {p.badge}
+                <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-brand-primary text-white text-xs font-extrabold px-4 py-1.5 rounded-full shadow-lg whitespace-nowrap flex items-center gap-1.5">
+                  {p.isPopular ? (
+                    <FlameSvg className="w-3.5 h-3.5 fill-current text-red-400" />
+                  ) : (
+                    <Sparkles className="w-3.5 h-3.5 text-blue-300" />
+                  )}
+                  <span>{p.badge}</span>
                 </div>
               )}
 

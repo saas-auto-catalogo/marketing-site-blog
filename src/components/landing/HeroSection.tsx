@@ -1,5 +1,13 @@
 import { useState } from 'react';
 import { Sparkles, ArrowRight, Play, CheckCircle2, RefreshCw, Zap } from 'lucide-react';
+import {
+  AutoCertoLogo,
+  AltimusLogo,
+  SisvagLogo,
+  BomControleLogo,
+  WebmotorsLogo,
+  FlameSvg
+} from '../icons/DmsLogos.js';
 
 const PREVIEW_CARS = [
   {
@@ -51,10 +59,12 @@ export function HeroSection() {
           
           {/* LADO ESQUERDO: TEXTO COMERCIAL DE ALTA CONVERSÃO */}
           <div className="lg:col-span-7 space-y-6 text-center lg:text-left">
-            {/* Pill Flutuante de Benefício */}
+            {/* Pill Flutuante de Benefício com SVG Flame */}
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-50 border border-blue-200/80 text-brand-primary text-xs font-extrabold shadow-sm">
-              <span className="flex h-2 w-2 rounded-full bg-brand-primary animate-pulse" />
-              <span>🔥 Atualização em Tempo Real • -38% no Custo por Lead (CPL)</span>
+              <span className="text-red-500 flex items-center">
+                <FlameSvg className="w-3.5 h-3.5 fill-current" />
+              </span>
+              <span>Atualização em Tempo Real • -38% no Custo por Lead (CPL)</span>
             </div>
 
             {/* Headline Principal */}
@@ -177,27 +187,36 @@ export function HeroSection() {
           </div>
         </div>
 
-        {/* TRUST BAR: HOMOLOGAÇÃO COM INTEGRADORES DMS BRASILEIROS */}
-        <div className="mt-16 pt-10 border-t border-surface-border text-center">
+        {/* TRUST BAR: HOMOLOGAÇÃO COM INTEGRADORES DMS BRASILEIROS (SVGs VETORIAIS) */}
+        <div id="integradores" className="mt-16 pt-10 border-t border-surface-border text-center">
           <p className="text-xs font-bold text-typography-muted uppercase tracking-widest">
             Sincronização 100% Homologada com os Principais Integradores do Brasil:
           </p>
-          <div className="mt-6 flex flex-wrap items-center justify-center gap-6 sm:gap-12 opacity-80 hover:opacity-100 transition-opacity font-extrabold text-sm sm:text-base text-slate-700">
-            <span className="px-3 py-1.5 rounded-lg bg-white border border-slate-200 shadow-sm flex items-center gap-2">
-              🚗 AutoCerto XML
-            </span>
-            <span className="px-3 py-1.5 rounded-lg bg-white border border-slate-200 shadow-sm flex items-center gap-2">
-              ⚡ Altimus Hub
-            </span>
-            <span className="px-3 py-1.5 rounded-lg bg-white border border-slate-200 shadow-sm flex items-center gap-2">
-              📊 Sisvag DMS
-            </span>
-            <span className="px-3 py-1.5 rounded-lg bg-white border border-slate-200 shadow-sm flex items-center gap-2">
-              💼 BomControle ERP
-            </span>
-            <span className="px-3 py-1.5 rounded-lg bg-white border border-slate-200 shadow-sm flex items-center gap-2">
-              🌐 Webmotors Custom
-            </span>
+          <div className="mt-6 flex flex-wrap items-center justify-center gap-4 sm:gap-8 font-extrabold text-xs sm:text-sm text-slate-700">
+            <div className="px-4 py-2 rounded-xl bg-white border border-slate-200 shadow-sm flex items-center gap-2.5 hover:border-brand-primary hover:shadow-md transition-all">
+              <AutoCertoLogo className="w-5 h-5" />
+              <span>AutoCerto XML</span>
+            </div>
+            
+            <div className="px-4 py-2 rounded-xl bg-white border border-slate-200 shadow-sm flex items-center gap-2.5 hover:border-brand-primary hover:shadow-md transition-all">
+              <AltimusLogo className="w-5 h-5" />
+              <span>Altimus Hub</span>
+            </div>
+
+            <div className="px-4 py-2 rounded-xl bg-white border border-slate-200 shadow-sm flex items-center gap-2.5 hover:border-brand-primary hover:shadow-md transition-all">
+              <SisvagLogo className="w-5 h-5" />
+              <span>Sisvag DMS</span>
+            </div>
+
+            <div className="px-4 py-2 rounded-xl bg-white border border-slate-200 shadow-sm flex items-center gap-2.5 hover:border-brand-primary hover:shadow-md transition-all">
+              <BomControleLogo className="w-5 h-5" />
+              <span>BomControle ERP</span>
+            </div>
+
+            <div className="px-4 py-2 rounded-xl bg-white border border-slate-200 shadow-sm flex items-center gap-2.5 hover:border-brand-primary hover:shadow-md transition-all">
+              <WebmotorsLogo className="w-5 h-5" />
+              <span>Webmotors Feed</span>
+            </div>
           </div>
         </div>
 
