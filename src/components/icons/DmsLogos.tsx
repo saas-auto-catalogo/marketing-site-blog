@@ -35,7 +35,7 @@ export function BomControleLogo({ className = "w-5 h-5" }: { className?: string 
       <rect width="24" height="24" rx="6" fill="#7C3AED" fillOpacity="0.1" />
       <path d="M6 7C6 5.89543 6.89543 5 8 5H13C14.6569 5 16 6.34315 16 8C16 9.14112 15.3581 10.1323 14.4172 10.632C15.5684 11.0855 16.3846 12.2033 16.3846 13.5C16.3846 15.433 14.8176 17 12.8846 17H8C6.89543 17 6 16.1046 6 15V7Z" fill="#7C3AED" />
       <path d="M8.5 7.5H12C12.5523 7.5 13 7.94772 13 8.5C13 9.05228 12.5523 9.5 12 9.5H8.5V7.5Z" fill="white" />
-      <path d="M8.5 11.5H12.5C13.0523 11.5 13.5 11.9477 13.5 12.5C13.5 13.0523 13.0523 13.5 12.5 13.5H8.5V11.5Z" fill="white" />
+      <path d="M8.5 11.5H12.5C13.0523 11.5 13.5 11.9477 13.5 12.5C13.0523 12.5 13.0523 13.5 12.5 13.5H8.5V11.5Z" fill="white" />
     </svg>
   );
 }
@@ -61,6 +61,22 @@ export function FlameSvg({ className = "w-4 h-4" }: { className?: string }) {
   return (
     <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
       <path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 3z" />
+    </svg>
+  );
+}
+
+export function LinkedInSvg({ className = "w-4 h-4" }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="currentColor">
+      <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z" />
+    </svg>
+  );
+}
+
+export function TwitterSvg({ className = "w-4 h-4" }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="currentColor">
+      <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
     </svg>
   );
 }

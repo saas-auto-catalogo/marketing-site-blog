@@ -1,15 +1,36 @@
 import { useState } from 'react';
-import { Layers, ArrowRight, Menu, X, Sparkles } from 'lucide-react';
+import { Layers, ArrowRight, Menu, X, Sparkles, BookOpen } from 'lucide-react';
 
-export function Navbar() {
+interface NavbarProps {
+  currentView?: 'LANDING' | 'BLOG' | 'ARTICLE';
+  onNavigate?: (view: 'LANDING' | 'BLOG') => void;
+}
+
+export function Navbar({ currentView = 'LANDING', onNavigate }: NavbarProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  const handleNav = (view: 'LANDING' | 'BLOG', hash?: string) => {
+    if (onNavigate) {
+      onNavigate(view);
+    }
+    if (hash) {
+      setTimeout(() => {
+        const el = document.getElementById(hash);
+        if (el) el.scrollIntoView({ behavior: 'smooth' });
+      }, 50);
+    }
+    setMobileMenuOpen(false);
+  };
 
   return (
     <header className="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-surface-border transition-all">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           {/* Brand Logo */}
-          <a href="#" className="flex items-center gap-3 group">
+          <button
+            onClick={() => handleNav('LANDING')}
+            className="flex items-center gap-3 group text-left"
+          >
             <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-primary to-brand-primary-dark flex items-center justify-center text-white shadow-md shadow-blue-500/20 group-hover:scale-105 transition-transform">
               <Layers className="w-5 h-5" />
             </div>
@@ -21,28 +42,48 @@ export function Navbar() {
                 Meta Automotive DAA
               </span>
             </div>
-          </a>
+          </button>
 
           {/* Nav Links Desktop */}
           <nav className="hidden md:flex items-center gap-8 text-sm font-semibold text-typography-body">
-            <a href="#como-funciona" className="hover:text-brand-primary transition-colors">
+            <button
+              onClick={() => handleNav('LANDING', 'como-funciona')}
+              className="hover:text-brand-primary transition-colors font-semibold"
+            >
               Como Funciona
-            </a>
-            <a href="#calculadora-roi" className="hover:text-brand-primary transition-colors flex items-center gap-1.5">
+            </button>
+            <button
+              onClick={() => handleNav('LANDING', 'calculadora-roi')}
+              className="hover:text-brand-primary transition-colors flex items-center gap-1.5 font-semibold"
+            >
               <span>Calculadora ROI</span>
               <span className="text-[10px] bg-green-100 text-green-700 font-bold px-1.5 py-0.5 rounded-full">
                 Novo
               </span>
-            </a>
-            <a href="#integradores" className="hover:text-brand-primary transition-colors">
+            </button>
+            <button
+              onClick={() => handleNav('LANDING', 'integradores')}
+              className="hover:text-brand-primary transition-colors font-semibold"
+            >
               Integradores DMS
-            </a>
-            <a href="#planos" className="hover:text-brand-primary transition-colors">
+            </button>
+            <button
+              onClick={() => handleNav('LANDING', 'planos')}
+              className="hover:text-brand-primary transition-colors font-semibold"
+            >
               Planos & Preços
-            </a>
-            <a href="#faq" className="hover:text-brand-primary transition-colors">
-              Dúvidas
-            </a>
+            </button>
+            <button
+              onClick={() => handleNav('BLOG')}
+              className={`hover:text-brand-primary transition-colors flex items-center gap-1 font-semibold ${
+                currentView === 'BLOG' || currentView === 'ARTICLE'
+                  ? 'text-brand-primary font-extrabold'
+                  : ''
+              }`}
+            >
+              <BookOpen className="w-4 h-4" />
+              <span>Blog & Guias</span>
+            </button>
           </nav>
 
           {/* Action CTAs */}
@@ -53,13 +94,13 @@ export function Navbar() {
             >
               Entrar
             </a>
-            <a
-              href="#planos"
+            <button
+              onClick={() => handleNav('LANDING', 'planos')}
               className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-brand-price hover:bg-red-700 text-white text-sm font-bold shadow-lg shadow-red-500/20 hover:shadow-red-500/30 transition-all hover:translate-y-[-1px]"
             >
               <Sparkles className="w-4 h-4" />
               <span>Teste Grátis 14 Dias</span>
-            </a>
+            </button>
           </div>
 
           {/* Botão Mobile */}
@@ -77,34 +118,31 @@ export function Navbar() {
       {/* Menu Mobile */}
       {mobileMenuOpen && (
         <div className="md:hidden border-b border-surface-border bg-white px-4 pt-2 pb-6 space-y-3">
-          <a
-            href="#como-funciona"
-            onClick={() => setMobileMenuOpen(false)}
-            className="block px-3 py-2 rounded-md text-base font-semibold text-typography-heading hover:bg-slate-50"
+          <button
+            onClick={() => handleNav('LANDING', 'como-funciona')}
+            className="block w-full text-left px-3 py-2 rounded-md text-base font-semibold text-typography-heading hover:bg-slate-50"
           >
             Como Funciona
-          </a>
-          <a
-            href="#calculadora-roi"
-            onClick={() => setMobileMenuOpen(false)}
-            className="block px-3 py-2 rounded-md text-base font-semibold text-typography-heading hover:bg-slate-50"
+          </button>
+          <button
+            onClick={() => handleNav('LANDING', 'calculadora-roi')}
+            className="block w-full text-left px-3 py-2 rounded-md text-base font-semibold text-typography-heading hover:bg-slate-50"
           >
             Calculadora de ROI
-          </a>
-          <a
-            href="#integradores"
-            onClick={() => setMobileMenuOpen(false)}
-            className="block px-3 py-2 rounded-md text-base font-semibold text-typography-heading hover:bg-slate-50"
-          >
-            Integradores DMS
-          </a>
-          <a
-            href="#planos"
-            onClick={() => setMobileMenuOpen(false)}
-            className="block px-3 py-2 rounded-md text-base font-semibold text-typography-heading hover:bg-slate-50"
+          </button>
+          <button
+            onClick={() => handleNav('LANDING', 'planos')}
+            className="block w-full text-left px-3 py-2 rounded-md text-base font-semibold text-typography-heading hover:bg-slate-50"
           >
             Planos & Preços
-          </a>
+          </button>
+          <button
+            onClick={() => handleNav('BLOG')}
+            className="block w-full text-left px-3 py-2 rounded-md text-base font-semibold text-brand-primary hover:bg-slate-50 flex items-center gap-2"
+          >
+            <BookOpen className="w-4 h-4" />
+            <span>Portal do Blog</span>
+          </button>
           <div className="pt-3 border-t border-slate-100 flex flex-col gap-2">
             <a
               href="http://127.0.0.1:5173"
@@ -112,14 +150,13 @@ export function Navbar() {
             >
               Acessar Plataforma
             </a>
-            <a
-              href="#planos"
-              onClick={() => setMobileMenuOpen(false)}
+            <button
+              onClick={() => handleNav('LANDING', 'planos')}
               className="w-full text-center py-2.5 rounded-lg bg-brand-price text-white text-sm font-bold flex items-center justify-center gap-2"
             >
               <span>Começar Teste Grátis</span>
               <ArrowRight className="w-4 h-4" />
-            </a>
+            </button>
           </div>
         </div>
       )}

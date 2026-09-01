@@ -1,6 +1,10 @@
-import { Layers, ShieldCheck, CheckCircle2, Heart } from 'lucide-react';
+import { Layers, ShieldCheck, CheckCircle2, Heart, BookOpen } from 'lucide-react';
 
-export function Footer() {
+interface FooterProps {
+  onNavigate?: (view: 'LANDING' | 'BLOG') => void;
+}
+
+export function Footer({ onNavigate }: FooterProps) {
   return (
     <footer className="bg-slate-900 text-slate-300 border-t border-slate-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
@@ -34,13 +38,28 @@ export function Footer() {
 
           {/* Coluna 3: Produto */}
           <div className="space-y-3">
-            <p className="text-xs font-bold text-white uppercase tracking-wider">Produto</p>
+            <p className="text-xs font-bold text-white uppercase tracking-wider">Navegação</p>
             <ul className="space-y-2 text-sm text-slate-400">
-              <li><a href="#como-funciona" className="hover:text-white transition-colors">Como Funciona</a></li>
-              <li><a href="#calculadora-roi" className="hover:text-white transition-colors">Calculadora de ROI</a></li>
-              <li><a href="#integradores" className="hover:text-white transition-colors">DMS Integrados</a></li>
-              <li><a href="#planos" className="hover:text-white transition-colors">Planos & Preços</a></li>
-              <li><a href="#faq" className="hover:text-white transition-colors">Perguntas Frequentes</a></li>
+              <li>
+                <button onClick={() => onNavigate?.('LANDING')} className="hover:text-white transition-colors">
+                  Página Inicial
+                </button>
+              </li>
+              <li>
+                <button onClick={() => onNavigate?.('BLOG')} className="hover:text-white transition-colors flex items-center gap-1.5 text-blue-400 font-bold">
+                  <BookOpen className="w-3.5 h-3.5" />
+                  <span>Portal do Blog</span>
+                </button>
+              </li>
+              <li>
+                <a href="#como-funciona" className="hover:text-white transition-colors">Como Funciona</a>
+              </li>
+              <li>
+                <a href="#calculadora-roi" className="hover:text-white transition-colors">Calculadora de ROI</a>
+              </li>
+              <li>
+                <a href="#planos" className="hover:text-white transition-colors">Planos & Preços</a>
+              </li>
             </ul>
           </div>
 

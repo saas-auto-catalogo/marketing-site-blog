@@ -1,0 +1,126 @@
+import { BlogArticle } from '../types/blog.js';
+
+export const SAMPLE_ARTICLES: BlogArticle[] = [
+  {
+    id: 'art-autocerto-meta-daa-2026',
+    slug: 'como-conectar-feed-xml-autocerto-meta-automotive-ads-daa',
+    title: 'Guia Completo 2026: Como Conectar o Feed XML do AutoCerto ao Meta Automotive Ads (DAA) e Reduzir o CPL em 38%',
+    metaDescription: 'Aprenda passo a passo como sincronizar seu estoque do AutoCerto com o Meta Commerce Manager para rodar anúncios dinâmicos de veículos no Instagram sem queimar verba em carros vendidos.',
+    category: 'META_ADS_DAA',
+    categoryLabel: 'Meta Automotive DAA',
+    readTime: '8 min de leitura',
+    publishedAt: '14 de Março, 2026',
+    updatedAt: '14 de Março, 2026',
+    featured: true,
+    author: {
+      name: 'Lucas Medeiros',
+      role: 'Head de Engenharia de Feeds & Performance',
+      avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=200&auto=format&fit=crop',
+      bio: 'Especialista em automação de catálogos automotivos e arquitetura de feeds com mais de 8 anos de experiência em mídia programática e Meta Graph API.',
+    },
+    heroImage: 'https://images.unsplash.com/photo-1555215695-3004980ad54e?q=80&w=1200&auto=format&fit=crop',
+    tags: ['AutoCerto XML', 'Meta DAA', 'Instagram Ads', 'CPL Reduction', 'Estoque Seminovos'],
+    summary: 'A publicidade dinâmica de inventário automotivo (Meta Automotive Inventory Ads - DAA) é a estratégia com maior retorno sobre investimento (ROI) para revendas de seminovos. Neste guia prático, desvendamos como normalizar o feed XML exportado pelo AutoCerto para atender aos rigorosos critérios do Meta Commerce Manager.',
+    tableOfContents: [
+      { id: 'o-que-e-meta-daa', title: '1. O que é Meta Automotive Inventory Ads (DAA)?', level: 2 },
+      { id: 'limitacoes-manuais', title: '2. Por que Anúncios Manuais Queimam Verba de Concessionárias?', level: 2 },
+      { id: 'mapeamento-autocerto-xsd', title: '3. Mapeamento Técnico de Tags: AutoCerto XML vs Meta XSD', level: 2 },
+      { id: 'normalizacao-fotos', title: '4. Requisitos Críticos de Imagens 1:1 e Resolução', level: 2 },
+      { id: 'passo-a-passo-setup', title: '5. Passo a Passo de Conexão no Auto Catálogo SaaS', level: 2 },
+      { id: 'perguntas-frequentes', title: '6. Perguntas Frequentes sobre Feeds do AutoCerto', level: 2 },
+    ],
+    keyInsights: [
+      'A Meta exige que o preço dos veículos contenha código ISO da moeda (ex: "349900 BRL") e rejeita tags com vírgulas ou símbolos soltos ("R$ 349.900,00").',
+      'Veículos vendidos precisam ter a tag <availability> atualizada para "out of stock" em no máximo 1 hora para evitar cliques inúteis de compradores frustrados.',
+      'A resolução ideal das fotos dos veículos no feed para o formato Carrossel DAA do Instagram é de 1080x1080 pixels (proporção quadrada 1:1).',
+    ],
+    faq: [
+      {
+        question: 'O AutoCerto gera o link do feed XML nativamente?',
+        answer: 'Sim, o AutoCerto possui a função de exportação de estoque em XML para portais. Nossa plataforma lê essa URL pública e converte o esquema para o padrão Atom/XML homologado pela Meta Graph API.',
+      },
+      {
+        question: 'Qual a frequência recomendada de sincronização com o Instagram?',
+        answer: 'Para revendas com alta rotatividade de estoque (mais de 50 carros no pátio), recomendamos sincronização a cada 15 minutos ou sub-hora contínua, disponível nos planos Pro e Enterprise.',
+      },
+      {
+        question: 'O que acontece se uma foto do carro for muito pequena?',
+        answer: 'O motor do Auto Catálogo faz o upscale e normalização automática das proporções para garantir que a imagem não seja rejeitada pelo Meta Commerce Manager.',
+      },
+    ],
+  },
+  {
+    id: 'art-altimus-vs-sisvag-2026',
+    slug: 'altimus-hub-vs-sisvag-dms-comparativo-feeds-meta-ads',
+    title: 'Altimus Hub vs Sisvag DMS: Qual a Melhor Plataforma de Gestão para Feeds Dinâmicos no Instagram?',
+    metaDescription: 'Comparativo técnico entre Altimus Hub e Sisvag DMS na geração de feeds XML e JSON para Meta Ads. Analisamos velocidade de atualização, estrutura de tags e facilidade de integração.',
+    category: 'GESTAO_ESTOQUE_DMS',
+    categoryLabel: 'Gestão de Estoque DMS',
+    readTime: '6 min de leitura',
+    publishedAt: '10 de Março, 2026',
+    updatedAt: '10 de Março, 2026',
+    featured: false,
+    author: {
+      name: 'Renata Albuquerque',
+      role: 'Consultora de CRM & Integrações Automotivas',
+      avatar: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=200&auto=format&fit=crop',
+      bio: 'Consultora especializada em migração de sistemas ERP/DMS em redes de concessionárias multimarcas.',
+    },
+    heroImage: 'https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&w=1200&auto=format&fit=crop',
+    tags: ['Altimus Hub', 'Sisvag DMS', 'Comparativo DMS', 'Feeds XML'],
+    summary: 'Conheça as principais diferenças de arquitetura entre Altimus Hub e Sisvag DMS na hora de alimentar campanhas de tráfego pago no Meta Ads.',
+    tableOfContents: [
+      { id: 'introducao-dms', title: '1. O Papel do DMS na Estratégia de Mídia', level: 2 },
+      { id: 'altimus-vantagens', title: '2. Arquitetura de Exportação do Altimus Hub', level: 2 },
+      { id: 'sisvag-vantagens', title: '3. Estrutura de Tags do Sisvag DMS', level: 2 },
+      { id: 'conclusao-escolha', title: '4. Qual Escolher para sua Concessionária?', level: 2 },
+    ],
+    keyInsights: [
+      'O Altimus Hub se destaca por suportar endpoints com paginação rápida e tags de opcionais detalhadas.',
+      'O Sisvag DMS possui um formato robusto de dados fiscais e controle rígido de histórico de baixas de pátio.',
+    ],
+    faq: [
+      {
+        question: 'O Auto Catálogo suporta ambos os sistemas?',
+        answer: 'Sim, o Auto Catálogo possui conectores nativos homologados tanto para o Altimus Hub quanto para o Sisvag DMS.',
+      },
+    ],
+  },
+  {
+    id: 'art-benchmarks-cpl-automotivo-2026',
+    slug: 'benchmarks-custo-por-lead-anuncios-carros-instagram-2026',
+    title: 'Benchmarks 2026: Por que Anúncios Manuais Custam até 3.2x Mais Caro que Feeds Automatizados',
+    metaDescription: 'Estudo com dados reais de mais de 120 concessionárias brasileiras mostra a diferença de CPL, CTR e conversão em visitas físicas entre anúncios manuais e catálogos dinâmicos.',
+    category: 'BENCHMARKS_ROI',
+    categoryLabel: 'Benchmarks & ROI',
+    readTime: '7 min de leitura',
+    publishedAt: '05 de Março, 2026',
+    updatedAt: '05 de Março, 2026',
+    featured: false,
+    author: {
+      name: 'Rodrigo Fontes',
+      role: 'Analista de Dados & Performance Automotiva',
+      avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=200&auto=format&fit=crop',
+      bio: 'Especialista em inteligência de mercado e análise quantitativa de campanhas automotivas.',
+    },
+    heroImage: 'https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?q=80&w=1200&auto=format&fit=crop',
+    tags: ['Benchmarks CPL', 'ROI Automotivo', 'Meta DAA', 'Dados de Mercado'],
+    summary: 'Análise profunda dos custos por lead no ecossistema automotivo brasileiro: entenda como a sincronização em tempo real protege o orçamento de marketing.',
+    tableOfContents: [
+      { id: 'panorama-mercado', title: '1. O Cenário de Aquisição de Leads em 2026', level: 2 },
+      { id: 'comparativo-cpl', title: '2. Comparativo de CPL: Manual vs Feed XML', level: 2 },
+      { id: 'impacto-tempo-resposta', title: '3. A Taxa de Conversão no WhatsApp', level: 2 },
+      { id: 'conclusao-roi', title: '4. Conclusão e Cálculo de Retorno', level: 2 },
+    ],
+    keyInsights: [
+      'Concessionárias que utilizam Meta DAA têm CPL médio de R$ 14,80 contra R$ 24,10 em anúncios estáticos convencionais.',
+      'Mais de 22% dos leads de anúncios manuais desistem da compra ao descobrir que o veículo anunciado já havia sido vendido dias antes.',
+    ],
+    faq: [
+      {
+        question: 'Qual o tempo médio para sentir a redução no CPL?',
+        answer: 'Em média, após 7 a 10 dias da ativação do feed dinâmico, o algoritmo da Meta otimiza as entregas para usuários com alta intenção de compra daquele modelo específico.',
+      },
+    ],
+  },
+];
