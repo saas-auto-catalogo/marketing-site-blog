@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { ChevronDown, HelpCircle, Sparkles } from 'lucide-react';
+import { getAppRegisterUrl } from '../../config/env.js';
 
 export function FaqSection() {
   const [openIdx, setOpenIdx] = useState<number | null>(0);
@@ -85,7 +86,7 @@ export function FaqSection() {
           </p>
           <div className="pt-2">
             <a
-              href="http://127.0.0.1:5173"
+              href={getAppRegisterUrl('trial')}
               className="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-brand-price hover:bg-red-700 text-white font-extrabold text-base shadow-lg shadow-black/20 transition-all hover:scale-105"
             >
               <Sparkles className="w-5 h-5" />

@@ -1,4 +1,5 @@
 import { Layers, ShieldCheck, CheckCircle2, Heart, BookOpen } from 'lucide-react';
+import { getAppLoginUrl } from '../../config/env.js';
 
 interface FooterProps {
   onNavigate?: (view: 'LANDING' | 'BLOG') => void;
@@ -80,7 +81,7 @@ export function Footer({ onNavigate }: FooterProps) {
             <p className="text-xs font-bold text-white uppercase tracking-wider">Acesso Direto</p>
             <div className="space-y-2">
               <a
-                href="http://127.0.0.1:5173"
+                href={getAppLoginUrl()}
                 className="block w-full text-center py-2 px-3 rounded-lg bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs transition-colors"
               >
                 Painel da Concessionária

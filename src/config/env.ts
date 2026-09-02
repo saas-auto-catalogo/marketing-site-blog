@@ -1,17 +1,44 @@
-const apiUrl = import.meta.env.VITE_API_URL ?? 'http://127.0.0.1:3333';
-const appUrl = import.meta.env.VITE_APP_URL ?? 'http://127.0.0.1:5173';
+export type AppRegisterPlan = 'STARTER' | 'PRO' | 'ENTERPRISE' | 'trial';
+
+const appUrl = (import.meta.env.VITE_APP_URL ?? 'http://127.0.0.1:5173').replace(/\/$/, '');
 
 export const env = {
-  apiUrl: apiUrl.replace(/\/$/, ''),
-  appUrl: appUrl.replace(/\/$/, ''),
+  appUrl,
 } as const;
 
-export function getCheckoutSuccessUrl(): string {
-  return `${window.location.origin}/checkout/success?session_id={CHECKOUT_SESSION_ID}`;
+export function getAppLoginUrl(): string {
+  return `${env.appUrl}/login`;
 }
 
-export function getCheckoutCancelUrl(): string {
-  return `${window.location.origin}/checkout/cancel`;
+export function getAppRegisterUrl(plan?: AppRegisterPlan): string {
+  const url = new URL(`${env.appUrl}/register`);
+  if (plan) {
+    url.searchParams.set('plan', plan);
+  }
+  return url.toString();
 }
 
-export const CHECKOUT_SESSION_STORAGE_KEY = 'autocatalogo_checkout_context';
+export function getAppSubscribeSuccessUrl(sessionId: string): string {
+  const url = new URL(`${env.appUrl}/subscribe/success`);
+  url.searchParams.set('session_id', sessionId);
+  return url.toString();
+}
+
+export function redirectLegacyCheckoutPath(pathname: string): boolean {
+  const path = pathname.toLowerCase();
+
+  if (path === '/checkout/success' || path === '/checkout/success/') {
+    const sessionId = new URLSearchParams(window.location.search).get('session_id');
+    window.location.replace(
+      sessionId ? getAppSubscribeSuccessUrl(sessionId) : getAppRegisterUrl()
+    );
+    return true;
+  }
+
+  if (path === '/checkout/cancel' || path === '/checkout/cancel/') {
+    window.location.replace(getAppRegisterUrl());
+    return true;
+  }
+
+  return false;
+}
