@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Layers, ArrowRight, Menu, X, Sparkles, BookOpen } from 'lucide-react';
+import { getAppLoginUrl, getAppRegisterUrl } from '../../config/env.js';
 
 interface NavbarProps {
   currentView?: 'LANDING' | 'BLOG' | 'ARTICLE';
@@ -26,7 +27,6 @@ export function Navbar({ currentView = 'LANDING', onNavigate }: NavbarProps) {
     <header className="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-surface-border transition-all">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
-          {/* Brand Logo */}
           <button
             onClick={() => handleNav('LANDING')}
             className="flex items-center gap-3 group text-left"
@@ -44,7 +44,6 @@ export function Navbar({ currentView = 'LANDING', onNavigate }: NavbarProps) {
             </div>
           </button>
 
-          {/* Nav Links Desktop */}
           <nav className="hidden md:flex items-center gap-8 text-sm font-semibold text-typography-body">
             <button
               onClick={() => handleNav('LANDING', 'como-funciona')}
@@ -86,24 +85,22 @@ export function Navbar({ currentView = 'LANDING', onNavigate }: NavbarProps) {
             </button>
           </nav>
 
-          {/* Action CTAs */}
           <div className="hidden sm:flex items-center gap-4">
             <a
-              href="http://127.0.0.1:5173"
+              href={getAppLoginUrl()}
               className="text-sm font-bold text-typography-heading hover:text-brand-primary transition-colors px-3 py-2"
             >
               Entrar
             </a>
-            <button
-              onClick={() => handleNav('LANDING', 'planos')}
+            <a
+              href={getAppRegisterUrl('trial')}
               className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-brand-price hover:bg-red-700 text-white text-sm font-bold shadow-lg shadow-red-500/20 hover:shadow-red-500/30 transition-all hover:translate-y-[-1px]"
             >
               <Sparkles className="w-4 h-4" />
               <span>Teste Grátis 14 Dias</span>
-            </button>
+            </a>
           </div>
 
-          {/* Botão Mobile */}
           <div className="md:hidden">
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -115,7 +112,6 @@ export function Navbar({ currentView = 'LANDING', onNavigate }: NavbarProps) {
         </div>
       </div>
 
-      {/* Menu Mobile */}
       {mobileMenuOpen && (
         <div className="md:hidden border-b border-surface-border bg-white px-4 pt-2 pb-6 space-y-3">
           <button
@@ -145,18 +141,18 @@ export function Navbar({ currentView = 'LANDING', onNavigate }: NavbarProps) {
           </button>
           <div className="pt-3 border-t border-slate-100 flex flex-col gap-2">
             <a
-              href="http://127.0.0.1:5173"
+              href={getAppLoginUrl()}
               className="w-full text-center py-2.5 rounded-lg border border-slate-200 text-sm font-bold text-typography-heading"
             >
-              Acessar Plataforma
+              Entrar
             </a>
-            <button
-              onClick={() => handleNav('LANDING', 'planos')}
+            <a
+              href={getAppRegisterUrl('trial')}
               className="w-full text-center py-2.5 rounded-lg bg-brand-price text-white text-sm font-bold flex items-center justify-center gap-2"
             >
               <span>Começar Teste Grátis</span>
               <ArrowRight className="w-4 h-4" />
-            </button>
+            </a>
           </div>
         </div>
       )}

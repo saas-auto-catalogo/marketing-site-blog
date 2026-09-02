@@ -8,6 +8,7 @@ import {
   WebmotorsLogo,
   FlameSvg
 } from '../icons/DmsLogos.js';
+import { getAppRegisterUrl } from '../../config/env.js';
 
 const PREVIEW_CARS = [
   {
@@ -83,7 +84,7 @@ export function HeroSection() {
             {/* CTAs de Ação */}
             <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
               <a
-                href="#planos"
+                href={getAppRegisterUrl('trial')}
                 className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-brand-price hover:bg-red-700 text-white font-extrabold text-base shadow-xl shadow-red-500/25 hover:shadow-red-500/35 transition-all hover:scale-[1.02]"
               >
                 <Sparkles className="w-5 h-5" />

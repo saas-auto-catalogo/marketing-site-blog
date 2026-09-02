@@ -1,17 +1,14 @@
 import { useState } from 'react';
 import { Check, Sparkles, ArrowRight, Shield } from 'lucide-react';
 import { FlameSvg } from '../icons/DmsLogos.js';
-import { SelectedPlan, BillingInterval, PlanKey } from '../../types/checkout.js';
+import { PlanKey } from '../../types/plan.js';
+import { getAppRegisterUrl } from '../../config/env.js';
 
-interface PricingSectionProps {
-  onSelectPlan?: (plan: SelectedPlan, interval: BillingInterval) => void;
-}
-
-export function PricingSection({ onSelectPlan }: PricingSectionProps) {
+export function PricingSection() {
   const [isAnnual, setIsAnnual] = useState(false);
 
   const plans: Array<{
-    key: PlanKey;
+    key: PlanKey | 'trial';
     name: string;
     isPopular: boolean;
     badge: string | null;
@@ -21,7 +18,10 @@ export function PricingSection({ onSelectPlan }: PricingSectionProps) {
     annualBilled: string;
     description: string;
     features: string[];
-    ctaText: string;
+    primaryCtaText: string;
+    secondaryCtaText?: string;
+    primaryRegisterPlan: 'STARTER' | 'PRO' | 'ENTERPRISE' | 'trial';
+    secondaryRegisterPlan?: 'STARTER' | 'PRO' | 'ENTERPRISE';
     ctaHighlight: boolean;
   }> = [
     {
@@ -41,7 +41,8 @@ export function PricingSection({ onSelectPlan }: PricingSectionProps) {
         'Normalização de preços e tags XSD',
         'Suporte por email e base de ajuda',
       ],
-      ctaText: 'Começar com Starter',
+      primaryCtaText: 'Contratar Starter',
+      primaryRegisterPlan: 'STARTER',
       ctaHighlight: false,
     },
     {
@@ -62,7 +63,10 @@ export function PricingSection({ onSelectPlan }: PricingSectionProps) {
         'Suporte prioritário via WhatsApp',
         'Alertas de veículos vendidos e falhas',
       ],
-      ctaText: 'Testar Pro Grátis por 14 Dias',
+      primaryCtaText: 'Testar Pro Grátis por 14 Dias',
+      secondaryCtaText: 'Contratar Pro',
+      primaryRegisterPlan: 'trial',
+      secondaryRegisterPlan: 'PRO',
       ctaHighlight: true,
     },
     {
@@ -83,31 +87,16 @@ export function PricingSection({ onSelectPlan }: PricingSectionProps) {
         'SLA garantido de 99.9% de uptime',
         'API de Webhooks e relatórios executivos',
       ],
-      ctaText: 'Assinar Plano Enterprise',
+      primaryCtaText: 'Assinar Plano Enterprise',
+      primaryRegisterPlan: 'ENTERPRISE',
       ctaHighlight: false,
     },
   ];
 
-  const handlePlanClick = (p: typeof plans[0]) => {
-    if (onSelectPlan) {
-      onSelectPlan(
-        {
-          key: p.key,
-          name: p.name,
-          monthlyPrice: p.monthlyPrice,
-          yearlyPrice: p.yearlyPrice,
-          carsLimit: p.carsLimit,
-        },
-        isAnnual ? 'YEARLY' : 'MONTHLY'
-      );
-    }
-  };
-
   return (
     <section id="planos" className="py-20 bg-white border-t border-surface-border">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
-        {/* Header dos Planos */}
+
         <div className="text-center max-w-3xl mx-auto space-y-4">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 text-brand-primary text-xs font-extrabold border border-blue-200">
             <Sparkles className="w-3.5 h-3.5" />
@@ -117,10 +106,9 @@ export function PricingSection({ onSelectPlan }: PricingSectionProps) {
             Planos Sob Medida para o Tamanho do seu Estoque
           </h2>
           <p className="text-base text-typography-muted leading-relaxed">
-            Teste grátis por 14 dias sem compromisso. Cancele quando quiser sem taxas de rescisão.
+            Teste grátis por 14 dias sem cartão. Contrate quando estiver pronto — checkout seguro após criar sua conta.
           </p>
 
-          {/* Toggle de Ciclo de Faturamento */}
           <div className="pt-4 flex items-center justify-center gap-3">
             <span className={`text-sm font-bold ${!isAnnual ? 'text-typography-heading' : 'text-typography-muted'}`}>
               Mensal
@@ -147,21 +135,19 @@ export function PricingSection({ onSelectPlan }: PricingSectionProps) {
           </div>
         </div>
 
-        {/* Grid de 3 Cards de Planos */}
         <div className="mt-16 grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch">
-          {plans.map((p, idx) => {
+          {plans.map((p) => {
             const displayPrice = isAnnual ? Math.round(p.yearlyPrice / 12) : p.monthlyPrice;
 
             return (
               <div
-                key={idx}
+                key={p.key}
                 className={`relative rounded-3xl p-8 flex flex-col justify-between transition-all duration-300 ${
                   p.ctaHighlight
                     ? 'bg-gradient-to-b from-blue-950 via-slate-900 to-slate-950 text-white shadow-2xl ring-2 ring-brand-primary scale-105 z-10'
                     : 'bg-surface-canvas border border-surface-border text-typography-body shadow-sm hover:shadow-lg'
                 }`}
               >
-                {/* Badge do Plano em SVG */}
                 {p.badge && (
                   <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-brand-primary text-white text-xs font-extrabold px-4 py-1.5 rounded-full shadow-lg whitespace-nowrap flex items-center gap-1.5">
                     {p.isPopular ? (
@@ -183,7 +169,6 @@ export function PricingSection({ onSelectPlan }: PricingSectionProps) {
                     </p>
                   </div>
 
-                  {/* Preço */}
                   <div className="space-y-1">
                     <div className="flex items-baseline gap-1">
                       <span className="text-sm font-bold text-typography-muted">R$</span>
@@ -199,7 +184,6 @@ export function PricingSection({ onSelectPlan }: PricingSectionProps) {
                     </p>
                   </div>
 
-                  {/* Lista de Features */}
                   <ul className="space-y-3 pt-4 border-t border-surface-border/50 text-xs">
                     {p.features.map((feat, fIdx) => (
                       <li key={fIdx} className="flex items-start gap-2.5">
@@ -212,26 +196,34 @@ export function PricingSection({ onSelectPlan }: PricingSectionProps) {
                   </ul>
                 </div>
 
-                {/* Botão de Ação */}
-                <div className="pt-8 mt-6">
-                  <button
-                    onClick={() => handlePlanClick(p)}
+                <div className="pt-8 mt-6 space-y-2">
+                  <a
+                    href={getAppRegisterUrl(p.primaryRegisterPlan)}
                     className={`w-full py-3.5 px-4 rounded-xl font-extrabold text-sm flex items-center justify-center gap-2 transition-all shadow-md ${
                       p.ctaHighlight
                         ? 'bg-brand-price hover:bg-red-700 text-white shadow-red-500/25 hover:shadow-red-500/35 hover:scale-[1.02]'
                         : 'bg-white hover:bg-slate-100 text-typography-heading border border-slate-200'
                     }`}
                   >
-                    <span>{p.ctaText}</span>
+                    <span>{p.primaryCtaText}</span>
                     <ArrowRight className="w-4 h-4" />
-                  </button>
+                  </a>
+
+                  {p.secondaryCtaText && p.secondaryRegisterPlan && (
+                    <a
+                      href={getAppRegisterUrl(p.secondaryRegisterPlan)}
+                      className="w-full py-2.5 px-4 rounded-xl font-bold text-xs flex items-center justify-center gap-2 transition-all border border-white/20 text-white hover:bg-white/10"
+                    >
+                      <span>{p.secondaryCtaText}</span>
+                      <ArrowRight className="w-3.5 h-3.5" />
+                    </a>
+                  )}
                 </div>
               </div>
             );
           })}
         </div>
 
-        {/* Garantia de Satisfação */}
         <div className="mt-12 text-center text-xs text-typography-muted flex items-center justify-center gap-2 font-semibold">
           <Shield className="w-4 h-4 text-green-600" />
           <span>Garantia de 14 dias de teste grátis com suporte técnico completo de homologação.</span>
