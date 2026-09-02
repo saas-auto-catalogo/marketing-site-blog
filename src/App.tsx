@@ -8,28 +8,75 @@ import { PricingSection } from './components/landing/PricingSection.js';
 import { TestimonialsSection } from './components/landing/TestimonialsSection.js';
 import { FaqSection } from './components/landing/FaqSection.js';
 import { TransparentCheckoutModal } from './components/checkout/TransparentCheckoutModal.js';
+import { CheckoutSuccessPage } from './components/checkout/CheckoutSuccessPage.js';
+import { CheckoutCancelPage } from './components/checkout/CheckoutCancelPage.js';
 import { BlogPortal } from './components/blog/BlogPortal.js';
 import { ArticleReader } from './components/blog/ArticleReader.js';
-import { SelectedPlan, BillingInterval } from './types/checkout.js';
+import { SelectedPlan, BillingInterval, PlanKey } from './types/checkout.js';
 import { BlogArticle } from './types/blog.js';
 import { SAMPLE_ARTICLES } from './data/sampleArticles.js';
+import { loadCheckoutContext } from './services/checkoutService.js';
+
+type AppView = 'LANDING' | 'BLOG' | 'ARTICLE' | 'CHECKOUT_SUCCESS' | 'CHECKOUT_CANCEL';
+
+const DEFAULT_PLAN: SelectedPlan = {
+  key: 'PRO',
+  name: 'Pro Automotive',
+  monthlyPrice: 890,
+  yearlyPrice: 8900,
+  carsLimit: 'Até 200 veículos',
+};
+
+const PLAN_DEFAULTS: Record<PlanKey, SelectedPlan> = {
+  STARTER: {
+    key: 'STARTER',
+    name: 'Starter Catalog',
+    monthlyPrice: 490,
+    yearlyPrice: 4900,
+    carsLimit: 'Até 50 veículos',
+  },
+  PRO: DEFAULT_PLAN,
+  ENTERPRISE: {
+    key: 'ENTERPRISE',
+    name: 'Enterprise DAA',
+    monthlyPrice: 1490,
+    yearlyPrice: 14900,
+    carsLimit: 'Veículos Ilimitados',
+  },
+};
+
+function parsePlanFromQuery(): { plan: SelectedPlan; interval: BillingInterval } | null {
+  const params = new URLSearchParams(window.location.search);
+  const planKey = params.get('plan')?.toUpperCase() as PlanKey | undefined;
+  const interval = params.get('interval')?.toUpperCase();
+
+  if (!planKey || !PLAN_DEFAULTS[planKey]) return null;
+
+  return {
+    plan: PLAN_DEFAULTS[planKey],
+    interval: interval === 'YEARLY' ? 'YEARLY' : 'MONTHLY',
+  };
+}
 
 export function App() {
-  const [currentView, setCurrentView] = useState<'LANDING' | 'BLOG' | 'ARTICLE'>('LANDING');
+  const [currentView, setCurrentView] = useState<AppView>('LANDING');
   const [selectedArticle, setSelectedArticle] = useState<BlogArticle>(SAMPLE_ARTICLES[0]);
   const [checkoutModalOpen, setCheckoutModalOpen] = useState(false);
-  const [selectedPlan, setSelectedPlan] = useState<SelectedPlan>({
-    key: 'PRO',
-    name: 'Pro Automotive',
-    monthlyPrice: 890,
-    yearlyPrice: 8900,
-    carsLimit: 'Até 200 veículos',
-  });
+  const [selectedPlan, setSelectedPlan] = useState<SelectedPlan>(DEFAULT_PLAN);
   const [billingInterval, setBillingInterval] = useState<BillingInterval>('MONTHLY');
 
-  // Parser de URL inicial e sincronizador com a History API
   const parseCurrentUrl = useCallback(() => {
     const path = window.location.pathname.toLowerCase();
+
+    if (path === '/checkout/success' || path === '/checkout/success/') {
+      setCurrentView('CHECKOUT_SUCCESS');
+      return;
+    }
+
+    if (path === '/checkout/cancel' || path === '/checkout/cancel/') {
+      setCurrentView('CHECKOUT_CANCEL');
+      return;
+    }
 
     if (path.startsWith('/blog/')) {
       const slug = path.replace('/blog/', '').replace(/\/$/, '');
@@ -49,7 +96,6 @@ export function App() {
     setCurrentView('LANDING');
   }, []);
 
-  // Inicialização e escuta de eventos popstate (botões Voltar/Avançar do navegador)
   useEffect(() => {
     parseCurrentUrl();
 
@@ -62,7 +108,31 @@ export function App() {
     return () => window.removeEventListener('popstate', handlePopState);
   }, [parseCurrentUrl]);
 
-  // Transição de rotas com pushState
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+
+    if (params.get('checkout') === '1') {
+      const fromQuery = parsePlanFromQuery();
+      const fromStorage = loadCheckoutContext();
+
+      if (fromQuery) {
+        setSelectedPlan(fromQuery.plan);
+        setBillingInterval(fromQuery.interval);
+      } else if (fromStorage) {
+        setSelectedPlan(fromStorage.plan);
+        setBillingInterval(fromStorage.billingInterval);
+      }
+
+      setCheckoutModalOpen(true);
+    } else {
+      const fromQuery = parsePlanFromQuery();
+      if (fromQuery) {
+        setSelectedPlan(fromQuery.plan);
+        setBillingInterval(fromQuery.interval);
+      }
+    }
+  }, []);
+
   const handleOpenArticle = (article: BlogArticle) => {
     setSelectedArticle(article);
     setCurrentView('ARTICLE');
@@ -83,14 +153,25 @@ export function App() {
     setCheckoutModalOpen(true);
   };
 
+  const handleRetryCheckout = () => {
+    const context = loadCheckoutContext();
+    if (context) {
+      setSelectedPlan(context.plan);
+      setBillingInterval(context.billingInterval);
+    }
+    setCurrentView('LANDING');
+    setCheckoutModalOpen(true);
+  };
+
+  const showLandingChrome = currentView === 'LANDING' || currentView === 'BLOG' || currentView === 'ARTICLE';
+
   return (
     <div className="min-h-screen flex flex-col bg-surface-canvas text-typography-body font-sans selection:bg-brand-primary selection:text-white">
-      {/* Navbar Superior com Links e Controle de Roteamento */}
-      <Navbar currentView={currentView} onNavigate={handleNavigate} />
+      {showLandingChrome && (
+        <Navbar currentView={currentView === 'ARTICLE' ? 'ARTICLE' : currentView === 'BLOG' ? 'BLOG' : 'LANDING'} onNavigate={handleNavigate} />
+      )}
 
-      {/* Conteúdo Dinâmico */}
       <main className="flex-1">
-        {/* VIEW 1: LANDING PAGE COMERCIAL (/) */}
         {currentView === 'LANDING' && (
           <>
             <HeroSection />
@@ -102,7 +183,6 @@ export function App() {
           </>
         )}
 
-        {/* VIEW 2: PORTAL DO BLOG AUDIENCE FIRST (/blog) */}
         {currentView === 'BLOG' && (
           <BlogPortal
             onSelectArticle={handleOpenArticle}
@@ -110,7 +190,6 @@ export function App() {
           />
         )}
 
-        {/* VIEW 3: LEITOR DE ARTIGO SEO LONG-FORM (/blog/:slug) */}
         {currentView === 'ARTICLE' && (
           <ArticleReader
             article={selectedArticle}
@@ -119,9 +198,14 @@ export function App() {
             onSelectArticle={handleOpenArticle}
           />
         )}
+
+        {currentView === 'CHECKOUT_SUCCESS' && <CheckoutSuccessPage />}
+
+        {currentView === 'CHECKOUT_CANCEL' && (
+          <CheckoutCancelPage onRetryCheckout={handleRetryCheckout} />
+        )}
       </main>
 
-      {/* Modal de Checkout Transparente Stripe */}
       <TransparentCheckoutModal
         isOpen={checkoutModalOpen}
         onClose={() => setCheckoutModalOpen(false)}
@@ -129,8 +213,7 @@ export function App() {
         billingInterval={billingInterval}
       />
 
-      {/* Footer Institucional */}
-      <Footer onNavigate={handleNavigate} />
+      {showLandingChrome && <Footer onNavigate={handleNavigate} />}
     </div>
   );
 }
