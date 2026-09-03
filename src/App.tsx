@@ -92,10 +92,7 @@ export function App() {
         )}
 
         {currentView === 'BLOG' && (
-          <BlogPortal
-            onSelectArticle={handleOpenArticle}
-            onGoToLanding={() => handleNavigate('LANDING')}
-          />
+          <BlogPortal onSelectArticle={handleOpenArticle} />
         )}
 
         {currentView === 'ARTICLE' && (

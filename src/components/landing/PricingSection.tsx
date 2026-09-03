@@ -106,7 +106,7 @@ export function PricingSection() {
             Planos Sob Medida para o Tamanho do seu Estoque
           </h2>
           <p className="text-base text-typography-muted leading-relaxed">
-            Teste grátis por 14 dias sem cartão. Contrate quando estiver pronto — checkout seguro após criar sua conta.
+            Escolha o plano ideal. Teste grátis por 14 dias no Pro — contrate quando estiver pronto.
           </p>
 
           <div className="pt-4 flex items-center justify-center gap-3">
