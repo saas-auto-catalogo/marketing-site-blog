@@ -10,9 +10,11 @@ import { FaqSection } from './components/landing/FaqSection.js';
 import { BlogPortal } from './components/blog/BlogPortal.js';
 import { ArticleReader } from './components/blog/ArticleReader.js';
 import { LegalDocumentPage } from './components/legal/LegalDocumentPage.js';
+import { CookieConsentBanner } from './components/legal/CookieConsentBanner.js';
 import { BlogArticle } from './types/blog.js';
 import { SAMPLE_ARTICLES } from './data/sampleArticles.js';
 import { redirectLegacyCheckoutPath } from './config/env.js';
+import { applyCookieConsent, readCookieConsent } from './lib/cookieConsent.js';
 
 type AppView = 'LANDING' | 'BLOG' | 'ARTICLE' | 'LEGAL';
 
@@ -20,6 +22,7 @@ export function App() {
   const [currentView, setCurrentView] = useState<AppView>('LANDING');
   const [selectedArticle, setSelectedArticle] = useState<BlogArticle>(SAMPLE_ARTICLES[0]);
   const [legalSlug, setLegalSlug] = useState('');
+  const [manageCookiesOpen, setManageCookiesOpen] = useState(false);
 
   const parseCurrentUrl = useCallback(() => {
     const path = window.location.pathname;
@@ -72,6 +75,13 @@ export function App() {
     window.addEventListener('popstate', handlePopState);
     return () => window.removeEventListener('popstate', handlePopState);
   }, [parseCurrentUrl]);
+
+  useEffect(() => {
+    const existing = readCookieConsent();
+    if (existing) {
+      applyCookieConsent(existing);
+    }
+  }, []);
 
   const handleOpenArticle = (article: BlogArticle) => {
     setSelectedArticle(article);
@@ -135,7 +145,17 @@ export function App() {
         )}
       </main>
 
-      <Footer onNavigate={handleNavigate} onOpenLegal={handleOpenLegal} />
+      <Footer
+        onNavigate={handleNavigate}
+        onOpenLegal={handleOpenLegal}
+        onManageCookies={() => setManageCookiesOpen(true)}
+      />
+
+      <CookieConsentBanner
+        forceOpen={manageCookiesOpen}
+        onCloseManage={() => setManageCookiesOpen(false)}
+        onOpenLegal={handleOpenLegal}
+      />
     </div>
   );
 }
