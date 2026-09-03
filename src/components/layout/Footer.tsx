@@ -1,11 +1,23 @@
 import { Layers, ShieldCheck, CheckCircle2, Heart, BookOpen } from 'lucide-react';
+import type { MouseEvent } from 'react';
 import { getAppLoginUrl } from '../../config/env.js';
+import { LEGAL_DOCUMENTS } from '../../data/legal/documents.js';
 
 interface FooterProps {
   onNavigate?: (view: 'LANDING' | 'BLOG') => void;
+  onOpenLegal?: (slug: string) => void;
 }
 
-export function Footer({ onNavigate }: FooterProps) {
+export function Footer({ onNavigate, onOpenLegal }: FooterProps) {
+  const handleLegalClick = (event: MouseEvent<HTMLAnchorElement>, slug: string) => {
+    if (!onOpenLegal) return;
+    if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || event.button !== 0) {
+      return;
+    }
+    event.preventDefault();
+    onOpenLegal(slug);
+  };
+
   return (
     <footer className="bg-slate-900 text-slate-300 border-t border-slate-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
@@ -96,11 +108,27 @@ export function Footer({ onNavigate }: FooterProps) {
           </div>
         </div>
 
-        <div className="pt-12 mt-12 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
-          <p>© 2026 Auto Catálogo SaaS. Todos os direitos reservados.</p>
-          <p className="flex items-center gap-1">
-            Feito para o ecossistema automotivo brasileiro <Heart className="w-3.5 h-3.5 text-red-500 fill-current" />
-          </p>
+        <div className="pt-12 mt-12 border-t border-slate-800 flex flex-col gap-4 text-xs text-slate-500">
+          <nav className="flex flex-wrap items-center justify-center sm:justify-start gap-x-3 gap-y-2">
+            {LEGAL_DOCUMENTS.map((doc, index) => (
+              <span key={doc.slug} className="inline-flex items-center gap-3">
+                {index > 0 && <span aria-hidden="true" className="text-slate-700">·</span>}
+                <a
+                  href={`/legal/${doc.slug}`}
+                  onClick={(event) => handleLegalClick(event, doc.slug)}
+                  className="hover:text-white transition-colors"
+                >
+                  {doc.shortLabel}
+                </a>
+              </span>
+            ))}
+          </nav>
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+            <p>© 2026 Auto Catálogo SaaS. Todos os direitos reservados.</p>
+            <p className="flex items-center gap-1">
+              Feito para o ecossistema automotivo brasileiro <Heart className="w-3.5 h-3.5 text-red-500 fill-current" />
+            </p>
+          </div>
         </div>
       </div>
     </footer>
