@@ -9,15 +9,17 @@ import { TestimonialsSection } from './components/landing/TestimonialsSection.js
 import { FaqSection } from './components/landing/FaqSection.js';
 import { BlogPortal } from './components/blog/BlogPortal.js';
 import { ArticleReader } from './components/blog/ArticleReader.js';
+import { LegalDocumentPage } from './components/legal/LegalDocumentPage.js';
 import { BlogArticle } from './types/blog.js';
 import { SAMPLE_ARTICLES } from './data/sampleArticles.js';
 import { redirectLegacyCheckoutPath } from './config/env.js';
 
-type AppView = 'LANDING' | 'BLOG' | 'ARTICLE';
+type AppView = 'LANDING' | 'BLOG' | 'ARTICLE' | 'LEGAL';
 
 export function App() {
   const [currentView, setCurrentView] = useState<AppView>('LANDING');
   const [selectedArticle, setSelectedArticle] = useState<BlogArticle>(SAMPLE_ARTICLES[0]);
+  const [legalSlug, setLegalSlug] = useState('');
 
   const parseCurrentUrl = useCallback(() => {
     const path = window.location.pathname;
@@ -27,6 +29,19 @@ export function App() {
     }
 
     const normalizedPath = path.toLowerCase();
+
+    if (normalizedPath.startsWith('/legal/')) {
+      const slug = normalizedPath.replace('/legal/', '').replace(/\/$/, '');
+      setLegalSlug(slug);
+      setCurrentView('LEGAL');
+      return;
+    }
+
+    if (normalizedPath === '/legal' || normalizedPath === '/legal/') {
+      setLegalSlug('');
+      setCurrentView('LEGAL');
+      return;
+    }
 
     if (normalizedPath.startsWith('/blog/')) {
       const slug = normalizedPath.replace('/blog/', '').replace(/\/$/, '');
@@ -62,6 +77,13 @@ export function App() {
     setSelectedArticle(article);
     setCurrentView('ARTICLE');
     window.history.pushState({ view: 'ARTICLE', slug: article.slug }, '', `/blog/${article.slug}`);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleOpenLegal = (slug: string) => {
+    setLegalSlug(slug);
+    setCurrentView('LEGAL');
+    window.history.pushState({ view: 'LEGAL', slug }, '', `/legal/${slug}`);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
@@ -103,9 +125,17 @@ export function App() {
             onSelectArticle={handleOpenArticle}
           />
         )}
+
+        {currentView === 'LEGAL' && (
+          <LegalDocumentPage
+            slug={legalSlug}
+            onGoToLanding={() => handleNavigate('LANDING')}
+            onOpenLegal={handleOpenLegal}
+          />
+        )}
       </main>
 
-      <Footer onNavigate={handleNavigate} />
+      <Footer onNavigate={handleNavigate} onOpenLegal={handleOpenLegal} />
     </div>
   );
 }
