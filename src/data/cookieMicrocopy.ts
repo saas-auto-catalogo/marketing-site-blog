@@ -1,0 +1,18 @@
+export const cookieBanner = {
+  title: 'Sua privacidade',
+  bodyBeforeLink: 'Usamos cookies essenciais para o site e a sessão funcionarem. Cookies analíticos ou de marketing só serão ativados com o seu consentimento, quando disponíveis. Saiba mais na ',
+  bodyLinkLabel: 'Política de Cookies',
+  bodyAfterLink: '.',
+  policyHref: '/legal/politica-de-cookies',
+  policySlug: 'politica-de-cookies',
+  acceptAll: 'Aceitar todos',
+  rejectNonEssential: 'Recusar não essenciais',
+  customize: 'Personalizar',
+  savePreferences: 'Salvar preferências',
+  categoryEssential: 'Essenciais (sempre ativos)',
+  categoryAnalytics: 'Analíticos',
+  categoryMarketing: 'Marketing',
+  categoryEssentialHelp: 'Necessários para autenticação, segurança e pagamento.',
+  categoryOptionalEmpty: 'Nenhuma ferramenta nesta categoria está ativa no momento.',
+  manageCookies: 'Gerenciar cookies',
+} as const;

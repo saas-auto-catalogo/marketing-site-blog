@@ -1,14 +1,16 @@
 import { Layers, ShieldCheck, CheckCircle2, Heart, BookOpen } from 'lucide-react';
 import type { MouseEvent } from 'react';
 import { getAppLoginUrl } from '../../config/env.js';
+import { cookieBanner } from '../../data/cookieMicrocopy.js';
 import { LEGAL_DOCUMENTS } from '../../data/legal/documents.js';
 
 interface FooterProps {
   onNavigate?: (view: 'LANDING' | 'BLOG') => void;
   onOpenLegal?: (slug: string) => void;
+  onManageCookies?: () => void;
 }
 
-export function Footer({ onNavigate, onOpenLegal }: FooterProps) {
+export function Footer({ onNavigate, onOpenLegal, onManageCookies }: FooterProps) {
   const handleLegalClick = (event: MouseEvent<HTMLAnchorElement>, slug: string) => {
     if (!onOpenLegal) return;
     if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || event.button !== 0) {
@@ -122,6 +124,16 @@ export function Footer({ onNavigate, onOpenLegal }: FooterProps) {
                 </a>
               </span>
             ))}
+            <span className="inline-flex items-center gap-3">
+              <span aria-hidden="true" className="text-slate-700">·</span>
+              <button
+                type="button"
+                onClick={() => onManageCookies?.()}
+                className="hover:text-white transition-colors"
+              >
+                {cookieBanner.manageCookies}
+              </button>
+            </span>
           </nav>
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
             <p>© 2026 Auto Catálogo SaaS. Todos os direitos reservados.</p>
