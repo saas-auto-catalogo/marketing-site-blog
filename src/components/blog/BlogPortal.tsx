@@ -2,10 +2,10 @@ import { useState, useMemo } from 'react';
 import { Search, Clock, ArrowRight, Sparkles, BookOpen, Flame, Tag } from 'lucide-react';
 import { BlogArticle, BlogCategory } from '../../types/blog.js';
 import { SAMPLE_ARTICLES } from '../../data/sampleArticles.js';
+import { getAppRegisterUrl } from '../../config/env.js';
 
 interface BlogPortalProps {
   onSelectArticle: (article: BlogArticle) => void;
-  onGoToLanding: () => void;
 }
 
 const CATEGORIES: Array<{ key: BlogCategory; label: string }> = [
@@ -16,7 +16,7 @@ const CATEGORIES: Array<{ key: BlogCategory; label: string }> = [
   { key: 'BENCHMARKS_ROI', label: 'Benchmarks & ROI' },
 ];
 
-export function BlogPortal({ onSelectArticle, onGoToLanding }: BlogPortalProps) {
+export function BlogPortal({ onSelectArticle }: BlogPortalProps) {
   const [selectedCategory, setSelectedCategory] = useState<BlogCategory>('TODAS');
   const [searchQuery, setSearchQuery] = useState('');
 
@@ -257,13 +257,13 @@ export function BlogPortal({ onSelectArticle, onGoToLanding }: BlogPortalProps) 
             </p>
           </div>
 
-          <button
-            onClick={onGoToLanding}
+          <a
+            href={getAppRegisterUrl('trial')}
             className="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-brand-price hover:bg-red-700 text-white font-extrabold text-sm shadow-xl shadow-red-500/25 transition-all shrink-0 hover:scale-105"
           >
             <Sparkles className="w-4 h-4" />
             <span>Começar Teste Grátis de 14 Dias</span>
-          </button>
+          </a>
         </div>
 
       </div>

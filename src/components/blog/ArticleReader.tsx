@@ -14,6 +14,7 @@ import { LinkedInSvg, TwitterSvg } from '../icons/DmsLogos.js';
 import { BlogArticle } from '../../types/blog.js';
 import { SAMPLE_ARTICLES } from '../../data/sampleArticles.js';
 import { JsonLdHead } from '../seo/JsonLdHead.js';
+import { getAppRegisterUrl } from '../../config/env.js';
 
 interface ArticleReaderProps {
   article: BlogArticle;
@@ -214,13 +215,13 @@ export function ArticleReader({
               <p className="text-[11px] text-typography-muted">
                 Conecte seu feed XML do AutoCerto em 3 minutos sem código.
               </p>
-              <button
-                onClick={onGoToLanding}
+              <a
+                href={getAppRegisterUrl('trial')}
                 className="w-full py-2 px-3 rounded-lg bg-brand-price hover:bg-red-700 text-white font-bold text-xs flex items-center justify-center gap-1.5 shadow-sm transition-colors"
               >
                 <Sparkles className="w-3.5 h-3.5" />
                 <span>Testar 14 Dias Grátis</span>
-              </button>
+              </a>
             </div>
           </aside>
 
@@ -373,13 +374,13 @@ export function ArticleReader({
                 </p>
               </div>
 
-              <button
-                onClick={onGoToLanding}
+              <a
+                href={getAppRegisterUrl('trial')}
                 className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-brand-price hover:bg-red-700 text-white font-extrabold text-xs shadow-lg shadow-red-500/25 transition-all shrink-0 hover:scale-105"
               >
                 <Sparkles className="w-4 h-4" />
                 <span>Começar Teste Grátis</span>
-              </button>
+              </a>
             </div>
 
             {/* SEÇÃO 4: Requisitos Críticos de Imagens */}
