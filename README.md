@@ -1,5 +1,8 @@
 # SaaS Auto Catálogo — Site Institucional e Blog
 
+[![CI](https://github.com/saas-auto-catalogo/marketing-site-blog/actions/workflows/ci.yml/badge.svg)](https://github.com/saas-auto-catalogo/marketing-site-blog/actions/workflows/ci.yml)
+
+
 Portal comercial de conversão e centro de autoridade de conteúdo orgânico para o setor automotivo.
 
 **Wiki:** [marketing-site-blog](https://github.com/saas-auto-catalogo/.github/blob/main/docs/wiki/marketing-site-blog.md)
