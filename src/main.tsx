@@ -1,10 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { Sentry } from './sentry.js';
 import { App } from './App.js';
 import './index.css';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <App />
+    <Sentry.ErrorBoundary fallback={<p>Algo deu errado. Tente recarregar a página.</p>}>
+      <App />
+    </Sentry.ErrorBoundary>
   </React.StrictMode>
 );
