@@ -10,7 +10,7 @@ export function JsonLdHead({ article }: JsonLdHeadProps) {
     if (!article) return;
 
     // Atualiza title e meta tags no documento
-    document.title = `${article.title} | Auto Catálogo Blog`;
+    document.title = `${article.title} | DriveSync`;
 
     let metaDesc = document.querySelector('meta[name="description"]');
     if (!metaDesc) {
@@ -36,15 +36,15 @@ export function JsonLdHead({ article }: JsonLdHeadProps) {
       },
       publisher: {
         '@type': 'Organization',
-        name: 'Auto Catálogo SaaS',
+        name: 'DriveSync',
         logo: {
           '@type': 'ImageObject',
-          url: 'https://autocatalogo.com.br/logo.png',
+          url: 'https://drivesync.me/logo.png',
         },
       },
       mainEntityOfPage: {
         '@type': 'WebPage',
-        '@id': `https://autocatalogo.com.br/blog/${article.slug}`,
+        '@id': `https://drivesync.me/blog/${article.slug}`,
       },
     };
 

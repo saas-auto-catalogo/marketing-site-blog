@@ -31,7 +31,7 @@ export function Footer({ onNavigate, onOpenLegal, onManageCookies }: FooterProps
                 <Layers className="w-5 h-5" />
               </div>
               <span className="text-xl font-extrabold text-white tracking-tight">
-                Auto Catálogo <span className="text-red-500">•</span>
+                DriveSync <span className="text-red-500">•</span>
               </span>
             </div>
 
@@ -136,7 +136,7 @@ export function Footer({ onNavigate, onOpenLegal, onManageCookies }: FooterProps
             </span>
           </nav>
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-            <p>© 2026 Auto Catálogo SaaS. Todos os direitos reservados.</p>
+            <p>© 2026 DriveSync. Todos os direitos reservados.</p>
             <p className="flex items-center gap-1">
               Feito para o ecossistema automotivo brasileiro <Heart className="w-3.5 h-3.5 text-red-500 fill-current" />
             </p>

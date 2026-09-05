@@ -1,7 +1,7 @@
 import { SAMPLE_ARTICLES } from '../data/sampleArticles.js';
 
 export function generateSitemapXml(): string {
-  const baseUrl = 'https://autocatalogo.com.br';
+  const baseUrl = 'https://drivesync.me';
   const now = new Date().toISOString().split('T')[0];
 
   const staticPages = [

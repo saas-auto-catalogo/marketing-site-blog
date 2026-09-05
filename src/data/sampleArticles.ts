@@ -26,7 +26,7 @@ export const SAMPLE_ARTICLES: BlogArticle[] = [
       { id: 'limitacoes-manuais', title: '2. Por que Anúncios Manuais Queimam Verba de Concessionárias?', level: 2 },
       { id: 'mapeamento-autocerto-xsd', title: '3. Mapeamento Técnico de Tags: AutoCerto XML vs Meta XSD', level: 2 },
       { id: 'normalizacao-fotos', title: '4. Requisitos Críticos de Imagens 1:1 e Resolução', level: 2 },
-      { id: 'passo-a-passo-setup', title: '5. Passo a Passo de Conexão no Auto Catálogo SaaS', level: 2 },
+      { id: 'passo-a-passo-setup', title: '5. Passo a Passo de Conexão no DriveSync', level: 2 },
       { id: 'perguntas-frequentes', title: '6. Perguntas Frequentes sobre Feeds do AutoCerto', level: 2 },
     ],
     keyInsights: [
@@ -45,7 +45,7 @@ export const SAMPLE_ARTICLES: BlogArticle[] = [
       },
       {
         question: 'O que acontece se uma foto do carro for muito pequena?',
-        answer: 'O motor do Auto Catálogo faz o upscale e normalização automática das proporções para garantir que a imagem não seja rejeitada pelo Meta Commerce Manager.',
+        answer: 'O motor do DriveSync faz o upscale e normalização automática das proporções para garantir que a imagem não seja rejeitada pelo Meta Commerce Manager.',
       },
     ],
   },
@@ -81,8 +81,8 @@ export const SAMPLE_ARTICLES: BlogArticle[] = [
     ],
     faq: [
       {
-        question: 'O Auto Catálogo suporta ambos os sistemas?',
-        answer: 'Sim, o Auto Catálogo possui conectores nativos homologados tanto para o Altimus Hub quanto para o Sisvag DMS.',
+        question: 'O DriveSync suporta ambos os sistemas?',
+        answer: 'Sim, o DriveSync possui conectores nativos homologados tanto para o Altimus Hub quanto para o Sisvag DMS.',
       },
     ],
   },
