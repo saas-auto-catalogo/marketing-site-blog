@@ -343,13 +343,13 @@ export function ArticleReader({
               <pre className="p-4 text-xs font-mono overflow-x-auto text-slate-300 leading-relaxed">
 {`<?xml version="1.0" encoding="UTF-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom" xmlns:g="http://base.google.com/ns/1.0">
-  <title>Auto Catálogo - Saga Motors Seminovos</title>
+  <title>DriveSync - Saga Motors Seminovos</title>
   <entry>
     <g:vehicle_id>AC-9842</g:vehicle_id>
     <g:title>BMW 320i M Sport 2.0 Turbo 2026</g:title>
     <g:description>Veículo revisado com garantia de fábrica, teto solar e painel digital.</g:description>
     <g:link>https://sagamotors.com.br/seminovos/bmw-320i-m-sport-2026</g:link>
-    <g:image_link>https://images.autocatalogo.com.br/feed/saga/bmw-320i-1.jpg</g:image_link>
+    <g:image_link>https://images.drivesync.me/feed/saga/bmw-320i-1.jpg</g:image_link>
     <g:price>349900 BRL</g:price>
     <g:availability>in stock</g:availability>
     <g:make>BMW</g:make>

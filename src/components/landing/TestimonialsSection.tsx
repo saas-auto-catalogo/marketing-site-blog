@@ -7,7 +7,7 @@ export function TestimonialsSection() {
       role: 'Diretor de Marketing & CRM',
       dealership: 'Grupo Saga Seminovos (14 Lojas)',
       image: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=200&auto=format&fit=crop',
-      text: 'O Auto Catálogo mudou o patamar da nossa operação. Antes, nossa equipe gastava mais de 20 horas por semana subindo carros manualmente. Hoje, o estoque sincroniza direto do AutoCerto e nosso CPL no Instagram despencou 42%.',
+      text: 'O DriveSync mudou o patamar da nossa operação. Antes, nossa equipe gastava mais de 20 horas por semana subindo carros manualmente. Hoje, o estoque sincroniza direto do AutoCerto e nosso CPL no Instagram despencou 42%.',
     },
     {
       name: 'Marcela Vasconcelos',
@@ -21,7 +21,7 @@ export function TestimonialsSection() {
       role: 'Head de Mídia de Performance',
       dealership: 'Motors Brasil Agency',
       image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=200&auto=format&fit=crop',
-      text: 'Atendemos mais de 25 revendas em SP e o Auto Catálogo é nosso parceiro padrão. A normalização de XML do Sisvag e Altimus para o Meta DAA funciona de forma impecável sem quebrar nenhum anúncio.',
+      text: 'Atendemos mais de 25 revendas em SP e o DriveSync é nosso parceiro padrão. A normalização de XML do Sisvag e Altimus para o Meta DAA funciona de forma impecável sem quebrar nenhum anúncio.',
     },
   ];
 
@@ -37,7 +37,7 @@ export function TestimonialsSection() {
             Quem Usa, Recomenda
           </h2>
           <p className="text-base text-typography-muted leading-relaxed">
-            Mais de 128 concessionárias e grupos automotivos aceleram suas vendas todos os dias com o Auto Catálogo.
+            Mais de 128 concessionárias e grupos automotivos aceleram suas vendas todos os dias com o DriveSync.
           </p>
         </div>
 

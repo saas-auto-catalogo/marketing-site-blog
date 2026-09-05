@@ -20,7 +20,7 @@ export function FaqSection() {
     },
     {
       q: 'Preciso ter conhecimentos de programação para configurar?',
-      a: 'Absolutamente nenhum. O Auto Catálogo é uma solução 100% no-code. Basta colar o link do seu feed XML gerado pelo seu DMS e nossa plataforma cuida de toda a normalização de tags, fotos e regras do Facebook/Instagram.',
+      a: 'Absolutamente nenhum. O DriveSync é uma solução 100% no-code. Basta colar o link do seu feed XML gerado pelo seu DMS e nossa plataforma cuida de toda a normalização de tags, fotos e regras do Facebook/Instagram.',
     },
     {
       q: 'Existe contrato de fidelidade ou multa de cancelamento?',

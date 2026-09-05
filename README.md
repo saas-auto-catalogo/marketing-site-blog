@@ -1,4 +1,4 @@
-# SaaS Auto Catálogo — Site Institucional e Blog
+# DriveSync — Site Institucional e Blog
 
 [![CI](https://github.com/saas-auto-catalogo/marketing-site-blog/actions/workflows/ci.yml/badge.svg)](https://github.com/saas-auto-catalogo/marketing-site-blog/actions/workflows/ci.yml)
 

@@ -53,7 +53,7 @@ export function FeaturesGrid() {
             Tudo o que sua Concessionária Precisa para Dominar o Meta Ads
           </h2>
           <p className="text-base text-typography-muted leading-relaxed">
-            Elimine planilhas manuais, suporte técnico demorado e ferramentas genéricas. O Auto Catálogo foi desenhado exclusivamente para o mercado automotivo nacional.
+            Elimine planilhas manuais, suporte técnico demorado e ferramentas genéricas. O DriveSync foi desenhado exclusivamente para o mercado automotivo nacional.
           </p>
         </div>
 

@@ -36,7 +36,7 @@ export function Navbar({ currentView = 'LANDING', onNavigate }: NavbarProps) {
             </div>
             <div className="flex flex-col">
               <span className="text-lg font-extrabold tracking-tight text-typography-heading flex items-center gap-1.5">
-                Auto Catálogo <span className="w-2 h-2 rounded-full bg-brand-price"></span>
+                DriveSync <span className="w-2 h-2 rounded-full bg-brand-price"></span>
               </span>
               <span className="text-[10px] text-typography-muted font-bold tracking-wider uppercase">
                 Meta Automotive DAA
