@@ -23,9 +23,12 @@ jobs:
           host: ${{ secrets.VPS_HOST }}
           username: ${{ secrets.VPS_USER }}
           key: ${{ secrets.VPS_SSH_KEY }}
+          # Host ECDSA key (sshd also has ED25519/RSA). Keep in sync with `ssh-keygen -lf /etc/ssh/ssh_host_ecdsa_key.pub` on the VPS.
           fingerprint: SHA256:Y2xt7oRzNaWivQcaxk3a9G4YuUWE0aEsuGhjcYeqR8k
-          timeout: 2m
-          command_timeout: 20m
+          # Dial + overall client budget. Keep generous: concurrent SPA publishes on a 2-vCPU VPS can exceed 2m.
+          timeout: 10m
+          # Allow waiting on /var/lock/autocatalogo-publish-spas.lock when other SPAs deploy in parallel.
+          command_timeout: 30m
           script: |
             set -euo pipefail
             /opt/autocatalogo/scripts/publish-spas.sh marketing-site-blog
