@@ -8,7 +8,7 @@ export function RoiCalculator() {
   const hoursSaved = Math.round(vehicles * 0.52);
   const moneySavedMedia = Math.round(vehicles * 47.5);
   const extraLeads = Math.round(vehicles * 0.85);
-  const estimatedRoi = ((moneySavedMedia * 12) / (890 * 12)).toFixed(1);
+  const estimatedRoi = ((moneySavedMedia * 12) / (197 * 12)).toFixed(1);
 
   return (
     <section id="calculadora-roi" className="py-20 bg-white border-y border-surface-border">
