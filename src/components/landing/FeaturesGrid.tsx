@@ -24,7 +24,7 @@ export function FeaturesGrid() {
       icon: <Smartphone className="w-6 h-6 text-blue-500" />,
       title: 'Carrossel Dinâmico Hiper-Personalizado',
       description:
-        'Exiba automaticamente para cada comprador os modelos exatos que ele tem interesse em comprar, aumentando em 2.4x o CTR dos anúncios.',
+        'Exiba automaticamente para cada comprador os modelos exatos que ele tem interesse em comprar, alcançando +240% de conversões em leads (3.4x mais volume) com a mesma verba de mídia.',
     },
     {
       icon: <Zap className="w-6 h-6 text-amber-500" />,

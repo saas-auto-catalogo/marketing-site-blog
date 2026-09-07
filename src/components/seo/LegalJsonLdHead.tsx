@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 
 const LANDING_TITLE = 'DriveSync — Feeds XML para Meta Automotive Ads no Instagram';
 const LANDING_DESCRIPTION =
-  'Automatize seu catálogo de veículos no Instagram e Facebook com feeds XML em tempo real do AutoCerto, Altimus e Sisvag. Reduza em 38% o custo por lead.';
+  'Automatize seu catálogo de veículos no Instagram e Facebook com feeds XML em tempo real do AutoCerto, Altimus e Sisvag. Reduza em até 47% o custo por lead e gere 3.4x mais leads.';
 const SITE_ORIGIN = 'https://drivesync.me';
 const JSON_LD_ATTR = 'auto-catalogo-legal';
 

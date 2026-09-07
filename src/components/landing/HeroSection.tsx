@@ -65,7 +65,7 @@ export function HeroSection() {
               <span className="text-red-500 flex items-center">
                 <FlameSvg className="w-3.5 h-3.5 fill-current" />
               </span>
-              <span>Atualização em Tempo Real • -38% no Custo por Lead (CPL)</span>
+              <span>Atualização em Tempo Real • -47% no Custo por Lead (CPL) • 3.4x Mais Leads</span>
             </div>
 
             {/* Headline Principal */}
@@ -78,7 +78,7 @@ export function HeroSection() {
 
             {/* Subtítulo com Dores Claras do Lojista */}
             <p className="text-base sm:text-lg text-typography-body max-w-2xl mx-auto lg:mx-0 leading-relaxed">
-              Conecte seu estoque do <strong>AutoCerto, Altimus ou Sisvag</strong> ao <strong>Meta Automotive Ads (DAA)</strong> em 3 minutos. Nunca mais queime verba de anúncios em carros já vendidos.
+              Conecte seu estoque do <strong>AutoCerto, Altimus ou Sisvag</strong> ao <strong>Meta Automotive Ads (DAA)</strong> em 3 minutos. Elimine 100% do inventário fantasma, reduza em até 44,8% o custo por carro vendido e nunca mais queime verba de anúncios em carros já vendidos.
             </p>
 
             {/* CTAs de Ação */}

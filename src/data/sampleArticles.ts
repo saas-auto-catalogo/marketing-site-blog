@@ -4,7 +4,7 @@ export const SAMPLE_ARTICLES: BlogArticle[] = [
   {
     id: 'art-autocerto-meta-daa-2026',
     slug: 'como-conectar-feed-xml-autocerto-meta-automotive-ads-daa',
-    title: 'Guia Completo 2026: Como Conectar o Feed XML do AutoCerto ao Meta Automotive Ads (DAA) e Reduzir o CPL em 38%',
+    title: 'Guia Completo 2026: Como Conectar o Feed XML do AutoCerto ao Meta Automotive Ads (DAA) e Reduzir o CPL em até 47%',
     metaDescription: 'Aprenda passo a passo como sincronizar seu estoque do AutoCerto com o Meta Commerce Manager para rodar anúncios dinâmicos de veículos no Instagram sem queimar verba em carros vendidos.',
     category: 'META_ADS_DAA',
     categoryLabel: 'Meta Automotive DAA',
@@ -89,7 +89,7 @@ export const SAMPLE_ARTICLES: BlogArticle[] = [
   {
     id: 'art-benchmarks-cpl-automotivo-2026',
     slug: 'benchmarks-custo-por-lead-anuncios-carros-instagram-2026',
-    title: 'Benchmarks 2026: Por que Anúncios Manuais Custam até 3.2x Mais Caro que Feeds Automatizados',
+    title: 'Benchmarks 2026: Por que Feeds Automatizados Geram 3.4x Mais Leads e Reduzem o CPL em até 47%',
     metaDescription: 'Estudo com dados reais de mais de 120 concessionárias brasileiras mostra a diferença de CPL, CTR e conversão em visitas físicas entre anúncios manuais e catálogos dinâmicos.',
     category: 'BENCHMARKS_ROI',
     categoryLabel: 'Benchmarks & ROI',
@@ -105,7 +105,7 @@ export const SAMPLE_ARTICLES: BlogArticle[] = [
     },
     heroImage: 'https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?q=80&w=1200&auto=format&fit=crop',
     tags: ['Benchmarks CPL', 'ROI Automotivo', 'Meta DAA', 'Dados de Mercado'],
-    summary: 'Análise profunda dos custos por lead no ecossistema automotivo brasileiro: entenda como a sincronização em tempo real protege o orçamento de marketing.',
+    summary: 'Análise profunda dos custos por lead no ecossistema automotivo: entenda como feeds automatizados e sincronização sub-hora geram 3.4x mais leads e reduzem o custo por lead (CPL) em até 47%, baseada em benchmarks empíricos de concessionárias reais.',
     tableOfContents: [
       { id: 'panorama-mercado', title: '1. O Cenário de Aquisição de Leads em 2026', level: 2 },
       { id: 'comparativo-cpl', title: '2. Comparativo de CPL: Manual vs Feed XML', level: 2 },
@@ -113,8 +113,10 @@ export const SAMPLE_ARTICLES: BlogArticle[] = [
       { id: 'conclusao-roi', title: '4. Conclusão e Cálculo de Retorno', level: 2 },
     ],
     keyInsights: [
-      'Concessionárias que utilizam Meta DAA têm CPL médio de R$ 14,80 contra R$ 24,10 em anúncios estáticos convencionais.',
-      'Mais de 22% dos leads de anúncios manuais desistem da compra ao descobrir que o veículo anunciado já havia sido vendido dias antes.',
+      'Reduções consistentes de CPL de -29% a -47%, atingindo até -83% em campanhas de estoque dinâmico.',
+      'Custo médio por carro vendido reduzido de $469 para $259 (-44,8%).',
+      'Aumento de 2,30% para 7,80% na taxa de conversão em leads (+240% / 3.4x mais leads).',
+      'Casos reais documentados: Rusnak Auto Group (-29% CPL e +44% volume), Della Chevrolet (219 leads com CPL de $27,41 e 34,25% de conversão para venda) e Porsche (-30% CPL).',
     ],
     faq: [
       {
