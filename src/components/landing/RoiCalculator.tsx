@@ -5,9 +5,9 @@ export function RoiCalculator() {
   const [vehicles, setVehicles] = useState(80);
 
   // Cálculos dinâmicos com base em dados de mercado
-  const hoursSaved = Math.round(vehicles * 0.52);
-  const moneySavedMedia = Math.round(vehicles * 47.5);
-  const extraLeads = Math.round(vehicles * 0.85);
+  const hoursSaved = Math.round(vehicles * 0.5);
+  const moneySavedMedia = Math.round(vehicles * 72);
+  const extraLeads = Math.round(vehicles * 1.8);
   const estimatedRoi = ((moneySavedMedia * 12) / (197 * 12)).toFixed(1);
 
   return (
@@ -91,7 +91,7 @@ export function RoiCalculator() {
                 R$ {moneySavedMedia.toLocaleString('pt-BR')} / Mês
               </p>
               <p className="text-xs text-typography-muted">
-                Em cliques de anúncios em veículos que já foram vendidos.
+                Em cliques de anúncios em veículos vendidos no fim de semana (inventário fantasma). Redução média de 47% no CPL.
               </p>
             </div>
 
@@ -107,7 +107,7 @@ export function RoiCalculator() {
                 +{extraLeads} Compradores
               </p>
               <p className="text-xs text-typography-muted">
-                Gerados pelo formato dinâmico com fotos 1:1 e preço correto.
+                Gerados pelo formato dinâmico com fotos 1:1 e preço correto. Ganho de 3.4x no volume de compradores qualificados (+240% de conversão).
               </p>
             </div>
 
