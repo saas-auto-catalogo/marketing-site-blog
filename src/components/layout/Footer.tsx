@@ -1,4 +1,4 @@
-import { Layers, ShieldCheck, CheckCircle2, Heart, BookOpen } from 'lucide-react';
+import { Layers, ShieldCheck, CheckCircle2, Heart, BookOpen, Mail } from 'lucide-react';
 import type { MouseEvent } from 'react';
 import { getAppLoginUrl } from '../../config/env.js';
 import { cookieBanner } from '../../data/cookieMicrocopy.js';
@@ -47,6 +47,23 @@ export function Footer({ onNavigate, onOpenLegal, onManageCookies }: FooterProps
               <div className="flex items-center gap-1.5 bg-slate-800/80 px-3 py-1.5 rounded-lg border border-slate-700">
                 <CheckCircle2 className="w-4 h-4 text-blue-400" />
                 <span>Meta Business Partner Ready</span>
+              </div>
+            </div>
+
+            {/* Canal de Atendimento & Suporte Corporativo */}
+            <div className="pt-2 flex items-center gap-2.5 text-xs sm:text-sm text-slate-300">
+              <div className="w-7 h-7 rounded-lg bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400 shrink-0">
+                <Mail className="w-3.5 h-3.5" aria-hidden="true" />
+              </div>
+              <div className="flex flex-wrap items-center gap-1.5">
+                <span className="text-slate-400">Suporte & Contato:</span>
+                <a
+                  href="mailto:contato@drivesync.me"
+                  aria-label="Enviar e-mail para contato@drivesync.me"
+                  className="text-blue-400 hover:text-blue-300 font-semibold underline decoration-blue-500/40 hover:decoration-blue-300 transition-colors break-all"
+                >
+                  contato@drivesync.me
+                </a>
               </div>
             </div>
           </div>
@@ -136,7 +153,17 @@ export function Footer({ onNavigate, onOpenLegal, onManageCookies }: FooterProps
             </span>
           </nav>
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-            <p>© 2026 DriveSync. Todos os direitos reservados.</p>
+            <p className="flex flex-wrap items-center justify-center sm:justify-start gap-x-2 gap-y-1">
+              <span>© 2026 DriveSync. Todos os direitos reservados.</span>
+              <span aria-hidden="true" className="hidden sm:inline text-slate-700">·</span>
+              <a
+                href="mailto:contato@drivesync.me"
+                aria-label="E-mail de contato corporativo contato@drivesync.me"
+                className="hover:text-white transition-colors"
+              >
+                contato@drivesync.me
+              </a>
+            </p>
             <p className="flex items-center gap-1">
               Feito para o ecossistema automotivo brasileiro <Heart className="w-3.5 h-3.5 text-red-500 fill-current" />
             </p>
